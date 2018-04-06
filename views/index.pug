@@ -3,3 +3,16 @@ extends layout
 block content
   h1= title
   p Welcome to #{title}
+  br
+
+  h2 Appointment
+     br
+     form(action='')
+         label Date:
+         input(type='date', name='Date')
+         input(type='submit')
+         br
+         label Time:
+         input(type='time', value='08:30:00', step='900')
+         br
+         br
