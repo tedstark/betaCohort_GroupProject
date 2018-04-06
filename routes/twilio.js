@@ -6,8 +6,8 @@ var router = express.Router();
 // var env = process.env;
 
 // Twilio Credentials
-const accountSid = 'ACce902923a05ff8ce42c3a9bc39acca48';
-const authToken = 'f127f92d0cc1b1a585eb858a4c452bf9';
+const accountSid = '';
+const authToken = '';
 // const accountSid = process.env.TWILIO_SID;
 // const authToken = process.env.TWILIO_AUTH;
 
