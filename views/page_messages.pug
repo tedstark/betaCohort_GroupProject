@@ -1,0 +1,27 @@
+extends page_layout
+
+block content
+    h1= title
+    p Welcome to #{title}
+    br
+    form(role='form' method='POST' action='/twilio/messages')
+        #form-group
+            label(for='msgCustom') Personalized Message:
+            input(name='msgCustom' type='text' placeholder='Enter Message Body...' size='35')
+        br
+        #form-group
+            label(for='msgFrom') Personalized From:
+            input(name='msgFrom' type='text' placeholder='From...' size='35')
+        br
+        #form-group
+            label(for='msgToNum') To #:
+            input(name='msgToNum', type='number')
+        br
+        #form-group
+            label(for='msgCBkNum') Callback #:
+            input(name='msgCBkNum', type='number')
+        br
+        br
+        input(type="submit", value="Submit Text")
+
+
