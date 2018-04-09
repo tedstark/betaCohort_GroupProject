@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Client Communication App</title>
+</head>
+<body>
+<form>
+
+    <h1>Custom Text Messaging</h1>
+
+    <p>
+        <scan>Custom Message
+            <input type="text" id="txtCustomMsg" placeholder="Type custom message"/>
+        </scan>
+    </p>
+
+    <p>
+        <scan>Message From Group
+            <select name="FromGroup" size="0" id="txtFromGroup">
+                <option value="Fresh Start">Fresh Start</option>
+                <option value="Social Services">Social Services</option>
+                <option value="Family Law">Family Law</option>
+            </select>
+        </scan>
+    </p>
+
+    <p>
+        <scan>Additional From Name
+            <input type="text" id="txtCustomFrom" placeholder="Type additional from name (optional)"/>
+        </scan>
+    </p>
+
+
+    <p>
+        <span>Message Callback Number
+            <input type="text" id="txtCallback" placeholder="Type callback number"/>
+        </span>
+    </p>
+
+    <p>
+        <span>Client's Phone Number
+            <input type="text" id = "txtClient" placeholder="Type Client's phone number"/>
+        </span>
+    </p>
+
+    <p>
+        <span>
+            <button id="btnPreview">Preview Text</button>
+            <button id="btnSend">Send Text</button>
+        </span>
+    </p>
+
+
+</form>
+
+</body>
+</html>

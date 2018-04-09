@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Client Communication App</title>
+</head>
+<body>
+<form>
+
+    <h1>Appointment Reminder Text Messaging</h1>
+
+    <p>
+        <scan>Reminder Message
+            <select name="StandardMsg" size="0" id="txtStandardMsg">
+                <option value="This is a reminder for your
+                appointment on (date) at (time). If you need to cancel
+                or reschedule; please call our offices at (callback#).
+                Message sent from (group) (optional name).">This is a reminder for
+                    your appointment on (date) at (time). If you need to cancel
+                    or reschedule; please call our offices at (callback#).
+                    Message sent from (group)(optional name).</option>
+                <option value="This is a reminder to bring the necessary
+                documents to your next appointment on (date) at (time). If you need
+                to cancel or reschedule; please call our offices at (callback#).
+                Message sent from (group) (optional name).">This is a reminder to
+                    bring the necessary documents to your next appointment on (date)
+                    at (time). If you need to cancel or reschedule; please call our
+                    offices at (callback#). Message sent from (group)(optional name).
+                </option>
+            </select>
+        </scan>
+    </p>
+
+    <p>
+        <scan>Custom Message
+            <input type="text" id="txtCustomMsg" placeholder="Type custom message"/>
+        </scan>
+    </p>
+
+    <p>
+        <scan>Appointment Date
+            <input type="text" id="txtAppDate" placeholder="DATE OBJECT HERE"/>
+
+            Appointment Time
+            <select name="AppTime" size="0" id="txtAppTime">
+                <option value="6:00am">6:00am</option>
+                <option value="6:15am">6:15am</option>
+                <option value="6:30am">6:30am</option>
+                <option value="6:45am">6:45am</option>
+                <option value="7:00am">7:00am</option>
+                <option value="7:15am">7:15am</option>
+                <option value="7:30am">7:30am</option>
+                <option value="7:45am">7:45am</option>
+                <option value="8:00am">8:00am</option>
+                <option value="8:15am">8:15am</option>
+                <option value="8:30am">8:30am</option>
+                <option value="8:45am">8:45am</option>
+                <option value="9:00am">9:00am</option>
+                <option value="9:15am">9:15am</option>
+                <option value="9:30am">9:30am</option>
+                <option value="9:45am">9:45am</option>
+                <option value="etc. to 10pm?">etc. to 10pm?</option>
+            </select>
+        </scan>
+    </p>
+
+    <p>
+        <scan>Message From Group
+            <select name="FromGroup" size="0" id="txtFromGroup">
+                <option value="Fresh Start">Fresh Start</option>
+                <option value="Social Services">Social Services</option>
+                <option value="Family Law">Family Law</option>
+            </select>
+        </scan>
+    </p>
+
+    <p>
+        <scan>Additional From Name
+            <input type="text" id="txtCustomFrom" placeholder="Type additional from name(optional)"/>
+        </scan>
+    </p>
+
+
+    <p>
+        <span>Message Callback Number
+            <input type="text" id="txtCallback" placeholder="Type callback number"/>
+        </span>
+    </p>
+
+    <p>
+        <span>Client's Phone Number
+            <input type="text" id="txtClient" placeholder="Type Client's phone number"/>
+        </span>
+    </p>
+
+    <p>
+        <button id="btnPreview">Preview Text</button>
+        <button id="btnSend">Send Text</button>
+    </p>
+
+</form>
+
+</body>
+</html>

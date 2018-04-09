@@ -1,0 +1,77 @@
+doctype html
+html(lang='en')
+    head
+        meta(charset='UTF-8')
+        title Client Communication App
+    body
+        form
+            h1 Appointment Reminder Text Messaging
+            p
+                scan
+                    | Reminder Message
+                    select#txtStandardMsg(name='StandardMsg', size='0')
+                        option(value='This is a reminder for your\
+            appointment on (date) at (time). If you need to cancel\
+            or reschedule; please call our offices at (callback#).\
+            Message sent from (group) (optional name).')
+                            | This is a reminder for
+                            | your appointment on (date) at (time). If you need to cancel
+                            | or reschedule; please call our offices at (callback#).
+                            | Message sent from (group)(optional name).
+                        option(value='This is a reminder to bring the necessary\
+            documents to your next appointment on (date) at (time). If you need\
+            to cancel or reschedule; please call our offices at (callback#).\
+            Message sent from (group) (optional name).')
+                            | This is a reminder to
+                            | bring the necessary documents to your next appointment on (date)
+                            | at (time). If you need to cancel or reschedule; please call our
+                            | offices at (callback#). Message sent from (group)(optional name).
+            p
+                scan
+                    | Custom Message
+                    input#txtCustomMsg(type='text', placeholder='Type custom message')
+            p
+                scan
+                    | Appointment Date
+                    input#txtAppDate(type='text', placeholder='DATE OBJECT HERE')
+                    |             Appointment Time
+                    select#txtAppTime(name='AppTime', size='0')
+                        option(value='6:00am') 6:00am
+                        option(value='6:15am') 6:15am
+                        option(value='6:30am') 6:30am
+                        option(value='6:45am') 6:45am
+                        option(value='7:00am') 7:00am
+                        option(value='7:15am') 7:15am
+                        option(value='7:30am') 7:30am
+                        option(value='7:45am') 7:45am
+                        option(value='8:00am') 8:00am
+                        option(value='8:15am') 8:15am
+                        option(value='8:30am') 8:30am
+                        option(value='8:45am') 8:45am
+                        option(value='9:00am') 9:00am
+                        option(value='9:15am') 9:15am
+                        option(value='9:30am') 9:30am
+                        option(value='9:45am') 9:45am
+                        option(value='etc. to 10pm?') etc. to 10pm?
+            p
+                scan
+                    | Message From Group
+                    select#txtFromGroup(name='FromGroup', size='0')
+                        option(value='Fresh Start') Fresh Start
+                        option(value='Social Services') Social Services
+                        option(value='Family Law') Family Law
+            p
+                scan
+                    | Additional From Name
+                    input#txtCustomFrom(type='text', placeholder='Type additional from name(optional)')
+            p
+                span
+                    | Message Callback Number
+                    input#txtCallback(type='text', placeholder='Type callback number')
+            p
+                span
+                    | Client's Phone Number
+                    input#txtClient(type='text', placeholder="Type Client's phone number")
+            p
+                button#btnPreview Preview Text
+                button#btnSend Send Text

@@ -1,8 +1,25 @@
 body {
   padding: 50px;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  font: 18px "Lucida Grande", Helvetica, Arial, sans-serif;
 }
 
 a {
   color: #00B7FF;
 }
+.cp {
+  font-size: 14px;
+}
+
+.box {
+  border-color: black;
+  border-width: medium;
+  font-size: 14px;
+  text-align: left;
+}
+
+.emsg{
+    color: red;
+    font-size: 12;
+    font-style: italic;
+}
+
