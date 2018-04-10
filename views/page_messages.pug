@@ -6,7 +6,8 @@ block content
     br
     form(role='form' method='POST' action='/twilio/messages')
         label(for='txtCustomMsg') Personalized Message:
-        input(name='msgCustom' type='text' placeholder='Enter Message Body...' size='35')
+        input(name='txtCustomMsg' type='text' placeholder='Enter Message Body...' size='35')
+        br
         br
         label(for='txtFromGrp') From Group:
         select(name='txtFromGrp', size='0')
@@ -15,19 +16,22 @@ block content
             option(value='Social Services') FSWF Social Services
             option(value='Family Law') FSWF Family Law
         br
-        label(for='msgFrom') From:
-        input(name='msgFrom' type='text' placeholder='From...' size='35')
+        br      
+        label(for='txtCustomFrom') From:
+        input(name='txtCustomFrom' type='text' placeholder='From...' size='35')
         br
-        label(for='msgToNum') To #:
+        br
+        label(for='txtClient') To #:
         .multiFieldWrapper
             .multiFields
                 .multiField
-                    input.msgToNum(name='msgToNum' type='number' placeholder='Client Phone...' data-field=0)
+                    input.msgToNum(name='txtClient' type='number' placeholder='Client Phone...' data-field=0)
                     button.removeNum.test(type='button' hidden) Remove 
         button.addNum(type='button' ) Add Number
         br
-        label(for='msgCBkNum') Callback #:
-        input(name='msgCBkNum', type='number' placeholder='Callback Phone...')
+        br
+        label(for='txtCallback') Callback #:
+        input(name='txtCallback', type='number' placeholder='Callback Phone...')
         br
         br
         input(type="submit", value="Submit Text")

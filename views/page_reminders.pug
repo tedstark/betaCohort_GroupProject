@@ -1,0 +1,43 @@
+extends page_layout
+
+block content
+    h1= title
+    p Welcome to #{title}
+    br
+    form(role='form' method='POST' action='/twilio/reminders')
+        br
+        br
+        label(for='standardMsg') Standard Message:
+        select(name="standardMsg" size="0")
+            option(disabled='', selected='', value='')  -- Select a Reminder -- 
+            option(value='This is a reminder for your upcoming FSWF appt.')
+                | This is a reminder your upcoming FSWF appt.    
+            option(value='This is a reminder to bring the necessary documents to your next FSWF appt.')
+                | This is a reminder to bring the necessary documents to your next appointment.    
+        br
+        br
+        label(for='txtCustomMsg') Custom Message:
+        input(name='txtCustomMsg' type='text' placeholder='Enter Message Body...' size='35')
+        br
+        br
+        label(for='txtCustomFrom') From:
+        input(name='txtCustomFrom' type='text' placeholder='From...' size='35')
+        br
+        br
+        label(for='txtFromGrp') From Group:
+        select(name='txtFromGrp', size='0')
+            option(disabled='', selected='', value='')  -- select an option -- 
+            option(value='Fresh Start') Fresh Start Women's Foundation
+            option(value='Social Services') FSWF Social Services
+            option(value='Family Law') FSWF Family Law
+        br
+        br
+        label(for='txtClient') Client #:
+        input(name='txtClient' type='number' placeholder='Client Phone...' data-field=0)
+        br
+        br
+        label(for='txtCallback') FSWF Contact #:
+        input(name='txtCallback', type='number' placeholder='FSWF Contact Phone...')
+        br
+        br
+        input(type="submit", value="Submit Text")

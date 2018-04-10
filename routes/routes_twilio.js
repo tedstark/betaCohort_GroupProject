@@ -19,19 +19,23 @@ router.get('/messages', function(req,res){
     });
 });
 
+// GET: Show 'Reminders' Page
+router.get('/reminders', function(req,res){
+    res.render('page_reminders', {
+        title: 'Send a Reminder'
+    });
+});
 
 // POST: Send a Message
 router.post('/messages', function(req, res) {
-    var values = $('.msgToNum').map(function() {return this.value; }).get();
     twilio.messages
         .create({
-            to: '+1'+req.body.msgToNum,
+            to: '+1'+req.body.txtClient,
             from: '+16027867178',
-            body: req.body.msgCustom+'  From: '+req.body.msgFrom+' Please call '+req.body.msgCBkNum+' with any changes.',
+            body: req.body.txtCustomMsg+'  From: '+req.body.txtCustomFrom+ ' with '+req.body.txtFromGrp+'. Please call '+req.body.txtCallback+' to cancel or change your appt.',
         })
         .then(message => console.log(message.sid));
     console.log('Submitted!');
-    console.log(values);
     res.redirect('/twilio/messages');
 });
 
