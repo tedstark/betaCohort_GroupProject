@@ -26,8 +26,9 @@
     "mongoose": "^5.0.11",
     "passport": "^0.4.0",
     "passport-local": "^1.0.0",
-    "popper": "^1.0.1",
+    "popper": "*",
     "process-env": "^1.1.0",
-    "moment": "*"
+    "moment": "*",
+    "dialog": "*"
   }
 }

@@ -1,79 +1,64 @@
 extends layout
 
 block content
-       form(method='POST', action='/msg/add')
-           .row
-               .col-md-1
-               .col-md-10.card.box
-                   .cp Custom Text Messages
-               .col-md-1
-           p
-           p.emsg(name='err')
-           p
-           P
-           .row
-               .col-md-1
-               .col-md-2.card.box
-                   .cp * Denotes Required Fields
-               .col-md-9.card.box
-           p
-               .row
-                    .col-md-1
-                    .col-md-2.card.box
-                        .cp *Message
-                    .col-md-9.card.box
-                        input(name='txtCustomMsg', type='text', placeholder='Enter custom message')
-               p
-               .row
-                    .col-md-1
-                    .col-md-2.card.box
-                        .cp Message From Group
-                    .col-md-6.card.box
-                        select(name='txtFromGroup', size='0')
-                            option(value='Fresh Start') Fresh Start
-                            option(value='Social Services') Social Services
-                            option(value='Family Law') Family Law
-                    .col-md-3
-               p
-               .row
-                    .col-md-1
-                    .col-md-2.card.box
-                        .cp From Name
-                    .col-md-6.card.box
-                        input(name='txtCustomFrom', type='text', placeholder='Enter additional from name (optional)')
-                    .col-md-3
-               p
-               .row
-                    .col-md-1
-                    .col-md-2.card.box
-                        .cp *Message Callback Number
-                    .col-md-6.card.box
-                        input(name='txtCallback', type='number', placeholder='Enter callback number')
-                    .col-md-3
-               p
-               .row
-                    .col-md-1
-                    .col-md-2.card.box
-                        .cp *Client's Phone Number
-                    .col-md-2.card.box
-                        input(name='txtClient', type='number', placeholder="Enter Client's phone number")
-                    .col-md-7
 
-               p
-               .row
-                   .col-md-1
-                   .col-md-2.card.box
-                       .cp Date
-                   .col-md-2.card.box
-                       input(name='txtAppDate', type='date')
-                   .col-md-2.card.box
-                       input(name='txtAppTime', type='time', value='08:30:00', step='900')
-                   .col-md-5
-               p
-               .row
-                    .col-md-1
-                    .col-md-1.card.box
-                        button#btnPreview.btn.btn-info Preview Text
-                    .col-md-1.card.box
-                        button#btnSend.btn.btn-success Send Text
-                    .col-md-9
+    h3 Custom Text Messages
+    form(method='POST', action='/submitcus')
+       p
+       p
+       .row
+           .col-md-1
+           .col-md-10.card.box
+               .cp * Denotes Required Fields
+           .col-md-1
+       p
+       .row
+            .col-md-1
+            .col-md-2.card.box
+                .cp * Message
+            .col-md-9.card.box
+                input(name='txtCustomMsg', type='text', placeholder='Enter custom message')
+       p
+       .row
+            .col-md-1
+            .col-md-2.card.box
+                .cp Message From Group
+            .col-md-6.card.box
+                select(name='txtFromGroup', size='0')
+                    option(value='Fresh Start') Fresh Start
+                    option(value='Social Services') Social Services
+                    option(value='Family Law') Family Law
+            .col-md-3
+       p
+       .row
+            .col-md-1
+            .col-md-2.card.box
+                .cp From Name
+            .col-md-6.card.box
+                input(name='txtCustomFrom', type='text', placeholder='Enter additional from name (optional)')
+            .col-md-3
+       p
+       .row
+            .col-md-1
+            .col-md-2.card.box
+                .cp * Message Callback Number
+            .col-md-6.card.box
+                input(name='txtCallback', type='number', placeholder='Enter callback number')
+            .col-md-3
+       p
+       .row
+            .col-md-1
+            .col-md-2.card.box
+                .cp * Client's Phone Number
+            .col-md-2.card.box
+                input(name='txtClient', type='number', placeholder="Enter Client's phone number")
+            .col-md-7
+       p
+       .row
+            .col-md-1
+            .col-md-1.card.box
+                button#btnSubmitCus.btn.btn-info Submit
+            .col-md-10
+
+    form(method='GET', action='/home')
+       button#btnHome.btn.btn-default back

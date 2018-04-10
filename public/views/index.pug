@@ -2,5 +2,14 @@ extends layout
 
 block content
   h1= title
-  p Welcome to FSWF (index.pug)
+  p Welcome to Text Messaging App
+
+  form(method='GET', action='/reminder')
+    button#btnReminder.btn.btn-info Appointment Reminders
+  p
+  p
+  p
+  form(method='GET', action='/message')
+      button#btnMessage.btn.btn-success Custom Messages
+
 
