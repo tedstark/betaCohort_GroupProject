@@ -1,0 +1,21 @@
+extends page_layout1
+
+block content
+  if !user
+    .container
+        br
+        h1 Please log in...
+        form(role='form',method='POST', action='/login')
+            .row
+                .six.columns
+                    label(for='username') Your User Name:
+                    input.form-control(class='u-full-width', name='username',type='text', placeholder='Username')
+            .row
+                .six.columns
+                    label(for='password') Your Password:
+                    input.form-control(class='u-full-width', name='password',type='password', placeholder='Password')
+            br
+            input.button-primary(type='submit', value='Submit')
+        br
+        if user
+            h1 Logout to see Login Form

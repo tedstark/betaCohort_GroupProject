@@ -5,38 +5,107 @@ const bodyParser = require('body-parser');
 const createError = require('http-errors');
 const cookieParser = require('cookie-parser');
 const logger = require('morgan');
-require('dotenv').config();
+const session = require('express-session');
+const expressValidator = require('express-validator');
+const flash = require('connect-flash');
+const passport = require('passport');
+const moment = require('moment-timezone');
+require('dotenv').config(); //dotenv
 
 //For Timestamp messages in console
 require('console-stamp')(console, 'HH:MM:ss');
 
+//Variable statements
 let app = express();
 let env = process.env;
-let indexRouter = require('./routes/routes_app');
-let usersRouter = require('./routes/routes_users');
-let twilioRouter = require('./routes/routes_twilio');
+let db = mongoose.connection;
 
-// Route statements
-app.use('/', indexRouter);
-app.use('/users', usersRouter);
-app.use('/twilio', twilioRouter);
+//Set Public folder path
+app.use(express.static(path.join(__dirname, 'public')));
+
+//Database related
+  //DB Connection
+  mongoose.connect(env.db_string);
+  //Check DB connection
+  db.once('open', function(err){
+    console.log('Connection made to Database: '+env.db_name);
+  })
+  //Check for DB errors
+  db.on('error', function(err){
+    console.log(err);
+  })
 
 // Load View Engine
 app.set('views', path.join(__dirname, 'views'));
 app.set('view engine', 'pug');
 
-//Set Public folder path
-app.use(express.static(path.join(__dirname, 'public')));
-
 //Middleware
     app.use(logger('dev'));
-    app.use(express.json());
-    app.use(express.urlencoded({ extended: false }));
+    // app.use(express.json());
+    // app.use(express.urlencoded({ extended: false }));
     app.use(cookieParser());
 
     //Body Parser Middleware
     app.use(bodyParser.json());
     app.use(bodyParser.urlencoded({ extended: false }));
+
+    //Express Session Middleware
+    app.use(session({
+        secret: 'keyboard cat',
+        resave: true,
+        saveUninitialized: true,
+        // cookie: {secure: true}
+    }));
+
+    //Express Messages Middleware
+    app.use(require('connect-flash')());
+    app.use(function (req, res, next) {
+        res.locals.messages = require('express-messages')(req, res);
+        next();
+    });
+
+    // Express Validator Middleware
+    app.use(expressValidator({
+        errorFormatter: function(param, msg, value) {
+            var namespace = param.split('.')
+            , root = namespace.shift()
+            , formParam = root;
+            while(namespace.length) {
+                formParam += '[' + namespace.shift() + ']';
+            }
+            return {
+                param : formParam,
+                msg   : msg,
+                value : value
+            };
+        }
+    }));
+
+    // Passport config
+    require('./config/config_passport')(passport);
+    // Passport Middleware
+    app.use(passport.initialize());
+    app.use(passport.session());
+
+    app.get('*', function(req,res,next){
+      res.locals.user=req.user || null;
+      next();
+    })
+
+// Routes
+  // Route variables
+  let twilioRouter = require('./routes/routes_twilio');
+  let usersRouter = require('./routes/routes_users');
+  let appRouter = require('./routes/routes_app');
+  let loginRouter = require('./routes/routes_login');
+
+  // Route statements
+  // app.use('/messages', appRouter);
+  // app.use('/reminders', appRouter);
+  app.use('/users', usersRouter);
+  app.use('/login', loginRouter);
+  app.use('/twilio', twilioRouter);
+  app.use('/', appRouter);
 
 // Error Handler
     // catch 404 and forward to error handler

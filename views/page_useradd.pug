@@ -1,0 +1,30 @@
+extends page_layout2
+
+block content
+    .container
+        br
+        h1 Add a User
+        form(role='form' method='POST' action='/users/add')
+            .form-group
+                label(for='username') Username:
+                input.form-control(class='u-full-width', name='username', type='text', placeholder='Username...')
+            br
+            .form-group
+                label(for='role') Role:
+                select.form-control(name='txtFromGrp', size='0')
+                    option(disabled='', selected='', value='')  -- select an option -- 
+                    option(value='admin') admin
+                    option(value='Social Services') FSWF Social Services
+                    option(value='Social Services') FSWF Family 
+
+            br
+            .form-group
+                label(for='password') Password:
+                input.form-control(name='password', type='password', placeholder='Enter password...')
+            br
+            .form-group
+                label(for='password2') Confirm Password:
+                input.form-control(name='password2' type='password' placeholder='Confirm password...')
+            br
+            button.btn.btn-primary(type='submit') Submit User
+        br

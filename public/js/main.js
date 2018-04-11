@@ -9,7 +9,6 @@ function init(){
 function enable () {
   $('.addNum').on('click', addNumFields);
   $('.removeNum').on('click', remNumFields);
-  // chgNumFields();
 }
 
 function addNumFields () {

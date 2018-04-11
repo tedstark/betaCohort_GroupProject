@@ -1,0 +1,29 @@
+doctype html
+html
+    head
+        title FSWF Messaging App
+        meta(name='viewport', content='width=device-width, initial-scale=1')
+        link(rel='shortcut icon', type='image/png', href='/images/favicon.ico')
+        link(href='//fonts.googleapis.com/css?family=Raleway:400,300,600', rel='stylesheet', type='text/css')
+        link(rel='stylesheet', href='/css/bootstrap.css')
+        link(rel='stylesheet', href='/css/style.css')
+        script(type='text/javascript' src='/js/jquery.js')
+        script(type='text/javascript' src='/js/main.js')
+    body
+        .container
+            //- A grey horizontal navbar that becomes vertical on small screens
+            nav.navbar.navbar-expand-sm.bg-light
+                ul.navbar-nav
+                    li.nav-item
+                        a.nav-link(href='#')
+            br
+            != messages('include_msgs', locals)
+            if errors
+              each error, i in errors
+                div.alert.alert-danger #{error.msg}  
+            br
+        block content
+        .container
+            hr
+            footer.myfooter
+              p.copyright Copyright ©2018
