@@ -6,6 +6,9 @@ const path = require('path');
 const dateformat = require('dateformat');
 const moment = require('moment-timezone');
 const dialog = require('dialog');
+const accountSid = 'ACbba27afc23b7049bdd547dc86724bc78';
+const authToken = '8e0a742139f4dd93463afcc1d9ba6098';
+const client = require('twilio')(accountSid, authToken);
 
 
 // Global Variables
@@ -14,6 +17,7 @@ app.use(function(req, res, next){
    res.locals.textMsg = "";
    next();
 });
+
 
 app.use(express.static('public/images'));
 
@@ -156,6 +160,13 @@ app.post('/submitrem', function(req, res){
 app.post('/send', function(req, res, next) {
     console.log("post /send");
     console.log("textMsg = " + textMsg);
+    client.messages.create({
+        to: '+14802720635',
+        from: '+14803729908',
+        body: textMsg
+    })
+        .then((message) => console.log(message.sid))
+
     res.render('index');
 
 });

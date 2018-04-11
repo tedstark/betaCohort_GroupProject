@@ -20,6 +20,18 @@ block content
                     option(value='This is a reminder to bring the necessary documents to your next appointment on ') This is a reminder to bring the necessary documents to your next appointment on
             .col-md-3
         p
+            .row
+                .col-md-1
+                .col-md-2.card.box
+                    .cp * Appointment Date
+                .col-md-2.card.box
+                    input(name='txtRAppDate', type='date')
+                .col-md-2.card.box
+                    .cp * Appointment Time
+                .col-md-2.card.box
+                    input(name='txtRAppTime', type='time', value='08:30:00', step='900')
+                .col-md-5
+       p
         .row
             .col-md-1
             .col-md-2.card.box
@@ -54,28 +66,13 @@ block content
                 input(name='txtRCallback', type='number', placeholder='Enter callback number')
             .col-md-3
         p
-        .row
-            .col-md-1
-            .col-md-2.card.box
-                .cp * Client's Phone Number
-            .col-md-2.card.box
-                input(name='txtRClient', type='number', placeholder="Enter Client's phone number")
-            .col-md-7
-
-        p
-        .row
-            .col-md-1
-            .col-md-2.card.box
-                .cp * Appointment Date
-            .col-md-2.card.box
-                input(name='txtRAppDate', type='date')
-            .col-md-2.card.box
-                .cp * Appointment Time
-            .col-md-2.card.box
-                input(name='txtRAppTime', type='time', value='08:30:00', step='900')
-            .col-md-5
-        p
-
+            row
+                .col-md-1
+                .col-md-2.card.box
+                    .cp * Client's Phone Number
+                .col-md-2.card.box
+                    input(name='txtRClient', type='number', placeholder="Enter Client's phone number")
+                .col-md-7
         .row
             .col-md-1
             .col-md-1.card.box

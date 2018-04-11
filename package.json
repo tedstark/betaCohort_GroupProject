@@ -29,6 +29,7 @@
     "popper": "*",
     "process-env": "^1.1.0",
     "moment": "*",
-    "dialog": "*"
+    "dialog": "*",
+    "twilio": "*"
   }
 }
