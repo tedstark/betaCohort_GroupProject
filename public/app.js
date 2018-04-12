@@ -6,8 +6,8 @@ const path = require('path');
 const dateformat = require('dateformat');
 const moment = require('moment-timezone');
 const dialog = require('dialog');
-const accountSid = 'ACbba27afc23b7049bdd547dc86724bc78';
-const authToken = '8e0a742139f4dd93463afcc1d9ba6098';
+const accountSid = TWILIO_SID;
+const authToken = TWILIO_AUTH;
 const client = require('twilio')(accountSid, authToken);
 
 
