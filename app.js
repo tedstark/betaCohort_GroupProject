@@ -25,10 +25,10 @@ app.use(express.static(path.join(__dirname, 'public')));
 
 //Database related
   //DB Connection
-  mongoose.connect(env.db_string);
+  mongoose.connect(env.DB_STRING);
   //Check DB connection
   db.once('open', function(err){
-    console.log('Connection made to Database: '+env.db_name);
+    console.log('Connection made to Database: '+env.DB_NAME);
   })
   //Check for DB errors
   db.on('error', function(err){
