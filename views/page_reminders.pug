@@ -5,20 +5,30 @@ block content
         .container
             h1 #{title}
             br
-            form(role='form' method='POST' action='/twilio/reminders')
-                br
-                br
-                label(for='standardMsg') Standard Message:
+            form(id="twilioForm" role='form' method='POST' action='/twilio/reminders')
+                label(for='standardMsg') Standard Reminder:
                 select(name="standardMsg" size="0")
-                    option(disabled='', selected='', value='')  -- Select a Reminder -- 
+                    option(disabled='', selected='', value='')  -- Select a Reminder Message -- 
                     option(value='This is a reminder for your upcoming FSWF appt.')
-                        | This is a reminder your upcoming FSWF appt.    
+                        | This is a reminder for your upcoming FSWF appt.    
                     option(value='This is a reminder to bring the necessary documents to your next FSWF appt.')
                         | This is a reminder to bring the necessary documents to your next appointment.    
                 br
                 br
                 label(for='txtCustomMsg') Custom Message:
                 input(name='txtCustomMsg' type='text' placeholder='Enter Message Body...' size='35')
+                //- br
+                //- br
+                //- label(for='txtCustomFrom') Client Appt Date/Time:
+                //- input(name='' type='datetime-local')
+                br
+                br
+                label(for='txtApptDate') Appointment Date:
+                input(name='txtApptDate' type='date')
+                br
+                br
+                label(for='txtApptTime') Appointment Time:
+                input(name='txtApptTime' type='time' value='09:00:00', step='900')
                 br
                 br
                 label(for='txtCustomFrom') From:
@@ -27,7 +37,7 @@ block content
                 br
                 label(for='txtFromGrp') From Group:
                 select(name='txtFromGrp', size='0')
-                    option(disabled='', selected='', value='')  -- select an option -- 
+                    option(disabled='', selected='', value='')  -- Select a Group -- 
                     option(value='Fresh Start') Fresh Start Women's Foundation
                     option(value='Social Services') FSWF Social Services
                     option(value='Family Law') FSWF Family Law
@@ -42,3 +52,4 @@ block content
                 br
                 br
                 input(type="submit", value="Submit Text")
+                input.clrForm(type="button", value="Reset Form")

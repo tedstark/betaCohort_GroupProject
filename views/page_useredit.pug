@@ -5,15 +5,14 @@ block content
         .container
             h1 #{title}
             br
-            form(role='form' method='POST' action='/users/add')
+            form(role='form' method='POST' action='/users/edit/'+userInForm._id)
                 .form-group
                     label(for='username') Username:
-                    input.form-control(class='u-full-width', name='username', type='text', placeholder='Username...')
+                    input.form-control(class='u-full-width', name='username', type='text', placeholder='Username...' value=userInForm.username)
                 br
                 .form-group
                     label(for='role') Role:
-                    select.form-control(name='role', size='0')
-                        option(disabled='', selected='', value='')  -- select an option -- 
+                    select.form-control(name='txtFromGrp', size='0' value=userInForm.role)
                         option(value='admin') admin
                         option(value='staff') staff
                 br
@@ -25,5 +24,5 @@ block content
                     label(for='password2') Confirm Password:
                     input.form-control(name='password2' type='password' placeholder='Confirm password...')
                 br
-                button.btn.btn-info(type='submit') Submit User
+                button.btn.btn-info(type='submit') Submit Changes
             br

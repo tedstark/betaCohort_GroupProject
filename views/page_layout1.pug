@@ -14,8 +14,10 @@ html
             //- A grey horizontal navbar that becomes vertical on small screens
             nav.navbar.navbar-expand-sm.bg-light
                 ul.navbar-nav
-                    li.nav-item
-                        a.nav-link(href='#')
+                    h5 FSWF Messaging Application
+                    if user
+                        li.nav-item
+                            a.nav-link(href='/login/logout') Logout
             br
             != messages('include_msgs', locals)
             if errors
@@ -26,4 +28,4 @@ html
         .container
             hr
             footer.myfooter
-              p.copyright Copyright ©2018
+              p.copyright Copyright ©2018 Fresh Start Women's Foundation

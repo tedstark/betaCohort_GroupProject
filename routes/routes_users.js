@@ -2,56 +2,43 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
+const dialog = require('dialog');
 
 // Bring in models
 let User = require('../models/user');
 
 // User Routes
-  // DOM: Show User Login block on page_home.pug
-  // router.get('/login',function (req,res) {
-  //     res.render('page_userlogin');
-  // });
-
-  // // POST: User Login process
-  // router.post('/login', function (req,res,next){
-  //   passport.authenticate('local', {
-  //     successRedirect: '/home',
-  //     failureRedirect: '/',
-  //     badRequestMessage: 'Please enter username and password.', //Default: Missing credentials
-  //     failureFlash: true
-  //   })
-  //   (req,res,next);
-  // })
-  //
-  // // DOM: Logout and show Home page with Login block
-  // router.get('/logout', function (req,res) {
-  //     req.logout();
-  //     req.flash('success', 'You are logged out!');
-  //     res.redirect('/');
-  // });
-
   // DOM: Show 'Add a User' Page
   router.get('/add', function(req,res){
-    res.render('page_useradd')
-    title: "User Registration"
+    res.render('page_useradd', {
+      title: 'Add a User'
+    })
   })
 
   // POST: Add a User to DB
   router.post('/add', function(req,res){
     req.checkBody('username', 'User name is required').notEmpty();
+    req.checkBody('role', 'User role is required').notEmpty();
     req.checkBody('password', 'A password is required').notEmpty();
     req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
     // Error check and handling
     let errors = req.validationErrors();
     if(errors){
-        res.render('page_useradd',{
-            errors:errors
-        });
+      // For Flash Messages
+        // res.render('page_useradd',{
+        //     errors:errors
+      // For Dialog popup window
+        let string = ''
+        for (i in errors) {
+          string+=errors[i].msg+'\n'
+        }
+        dialog.info(string);
     } else {
       // If no errors, create new user in DB
       let user = new User();
         user.username = req.body.username,
         user.password = req.body.password,
+        user.role = req.body.role,
         user.openpwd = req.body.password,
         user.active = true,
       bcrypt.genSalt(10, function (err, salt) {
@@ -66,7 +53,7 @@ let User = require('../models/user');
                   return;
                 } else {
                     req.flash('success', 'User '+user.username+' added!');
-                    res.redirect('/users/view');
+                    res.redirect('/users/list');
                   }
               });
           });
@@ -75,7 +62,7 @@ let User = require('../models/user');
   });
 
   //DOM: Show 'User List' Page
-  router.get('/view', function(req,res){
+  router.get('/list', function(req,res){
     User.find({}, function(err, users){
       if(err){
         console.log(err);
@@ -89,18 +76,17 @@ let User = require('../models/user');
 
   //DOM: Show 'Edit a User' Page
   router.get('/edit/:id', function(req,res){
-    User.findById(req.params.id, function(err, user){
-      res.render('page_useredit', {
-        user:user
-      });
+    User.findById(req.params.id, function(err, userFrmDB){
+      res.render('page_useredit', {userInForm:userFrmDB});
     });
   });
 
   //POST: Edit a User in the database
   router.post('/edit/:id', function(req,res){
-    req.checkBody('input_username', 'User name is required').notEmpty();
-    req.checkBody('input_password', 'A password is required').notEmpty();
-    req.checkBody('input_password2', 'Passwords do not match').equals(req.body.input_password);
+    req.checkBody('username', 'User name is required').notEmpty();
+    req.checkBody('role', 'User role is required').notEmpty();
+    req.checkBody('password', 'A password is required').notEmpty();
+    req.checkBody('password2', 'Passwords do not match').equals(req.body.password);
     // Error check and handling
     let errors = req.validationErrors();
     if(errors){
@@ -109,10 +95,11 @@ let User = require('../models/user');
         });
     } else {
       let user = {};
-        user.username = req.body.input_username,
-        user.password = req.body.input_password,
-        user.openpwd = req.body.input_password,
-        user.active = true
+        user.username = req.body.username,
+        user.password = req.body.password,
+        user.role = req.body.role,
+        user.openpwd = req.body.password,
+        user.active = true,
       bcrypt.genSalt(10, function (err, salt) {
         bcrypt.hash(user.password, salt, function (err, hash) {
           if (err) {
@@ -127,7 +114,7 @@ let User = require('../models/user');
                 return;
               } else {
                   req.flash('success', 'User '+user.username+' Updated!');
-                  res.redirect('/users/view/:id');
+                  res.redirect('/users/list');
                 }
             });
           }
@@ -135,16 +122,6 @@ let User = require('../models/user');
       })
     }
 });
-  //DOM: Show a single User page
-  router.get('/view/:id', function(req,res){
-    User.findById(req.params.id, function(err, user){
-      res.render('page_user', {
-        user:user,
-        username:user.username
-      });
-    });
-  });
-
   // DELETE: Removes user from database
   router.delete('/delete/:id', function (req,res) {
     let query = {_id:req.params.id}

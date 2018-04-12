@@ -5,15 +5,15 @@ block content
         .container
             h1 #{title}
             br
-            form(role='form' method='POST' action='/twilio/messages')
+            form(id="twilioForm" role='form' method='POST' action='/twilio/multimsgs')
                 label(for='txtCustomMsg') Personalized Message:
                 input(name='txtCustomMsg' type='text' placeholder='Enter Message Body...' size='35')
                 br
                 br
                 label(for='txtFromGrp') From Group:
                 select(name='txtFromGrp', size='0')
-                    option(disabled='', selected='', value='')  -- select an option -- 
-                    option(value='Fresh Start') Fresh Start Women's Foundation
+                    option(disabled='', selected='', value='')  -- Select a Group -- 
+                    option(value="Fresh Start Women's Foundation") Fresh Start Women's Foundation
                     option(value='Social Services') FSWF Social Services
                     option(value='Family Law') FSWF Family Law
                 br
@@ -22,13 +22,8 @@ block content
                 input(name='txtCustomFrom' type='text' placeholder='From...' size='35')
                 br
                 br
-                label(for='txtClient') To #:
-                .multiFieldWrapper
-                    .multiFields
-                        .multiField
-                            input.msgToNum(name='txtClient' type='number' placeholder='Client Phone...' data-field=0)
-                            button.removeNum.test(type='button' hidden) Remove 
-                button.addNum(type='button' ) Add Number
+                label(for='txtClient1') To #:
+                input.msgToNum(name='txtClient1' type='number' placeholder='Client Phone #1...' maxlength="10")
                 br
                 br
                 label(for='txtCallback') Callback #:
@@ -36,3 +31,4 @@ block content
                 br
                 br
                 input(type="submit", value="Submit Text")
+                input.clrForm(type="button", value="Reset Form")

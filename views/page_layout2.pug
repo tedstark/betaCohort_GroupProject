@@ -14,14 +14,16 @@ html
             //- A grey horizontal navbar that becomes vertical on small screens
             nav.navbar.navbar-expand-sm.bg-light
                 ul.navbar-nav
-                    li.nav-item
-                        a.nav-link(href='/') Home
+                    //- li.nav-item
+                    //-     a.nav-link(href='/') Home
                     if user
                         li.nav-item
                             a.nav-link(href='/reminders') Reminders
                         li.nav-item
                             a.nav-link(href='/messages') Messages
                         if user.role=='admin'    
+                            li.nav-item
+                                a.nav-link(href='/users/list') All Users
                             li.nav-item
                                 a.nav-link(href='/users/add') Add a User
                         li.nav-item
@@ -30,10 +32,10 @@ html
             != messages('include_msgs', locals)
             if errors
               each error, i in errors
-                div.alert.alert-danger #{error.msg}  
+                div.alert.alert-danger.alert-dismissible.close #{error.msg}  
             br
         block content
         .container
             hr
             footer.myfooter
-              p.copyright Copyright ©2018
+              p.copyright Copyright ©2018 Fresh Start Women's Foundation
