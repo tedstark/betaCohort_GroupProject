@@ -6,8 +6,8 @@ const path = require('path');
 const dateformat = require('dateformat');
 const moment = require('moment-timezone');
 const dialog = require('dialog');
-const accountSid = 'ACbba27afc23b7049bdd547dc86724bc78';
-const authToken = '8e0a742139f4dd93463afcc1d9ba6098';
+// const accountSid = TWILIO_SID;
+// const authToken = TWILIO_AUTH;
 const client = require('twilio')(accountSid, authToken);
 
 
@@ -15,16 +15,24 @@ const client = require('twilio')(accountSid, authToken);
 app.use(function(req, res, next){
    res.locals.errors = "";
    res.locals.textMsg = "";
+   res.locals.returnpage = "";
+   res.locals.ccustomMsg = "";
+   res.locals.ccustomFrom = "";
+   res.locals.cfromGroup = "";
+   res.locals.ccallback = "";
+   res.locals.cclient = "";
    next();
 });
 
 
 app.use(express.static('public/images'));
 
+// style.css path
 app.get('/css/style.css', function(req, res){
     res.sendFile(__dirname + '/css/style.css');
 });
 
+// preview.pug path
 app.get('/views/preview.pug', function(req, res){
     res.sendFile(__dirname + '/views/preview.pug');
 });
@@ -58,72 +66,80 @@ app.use(expresValidator({
     }
 }));
 
+// loads index page when app.js is run
 app.get('/', function(req, res){
    console.log("get / index");
    res.render('index');
 });
 
+// reminder button on index page
 app.get('/reminder', function(req, res){
     console.log("get /reminder");
     res.render('reminder');
 });
 
+// message button on index page
 app.get('/message', function(req, res){
     console.log("get /message");
     res.render('message');
 });
 
+// submit text button on message page
 app.post('/submitcus', function(req, res){
     console.log("post /submitcus");
 
+    // do data validation
     req.checkBody('txtCustomMsg', 'Custom message is required').notEmpty();
     req.checkBody('txtCallback', 'Callback number is required').notEmpty();
     req.checkBody('txtClient', 'Client number is required').notEmpty();
 
+    // check for errors in data entry
     var cerrors = req.validationErrors();
 
     if (cerrors) {
-        errmsgs = "Error: Must provide all required fields";
-        console.log(errmsgs);
+        errmsgs = "Please provide all required fields";
         // display error warning popup window
-        dialog.info('Please provide all required fields.');
+        dialog.warn(errmsgs, "Errors:" );
 
     } else {
+        // save field values from page
+        ccustomMsg = req.body.txtCustomMsg;
+        ccustomFrom = req.body.txtCustomFrom;
+        cfromGroup = req.body.txtFromGroup;
+        ccallback = req.body.txtCallback;
+        cclient = req.body.txtClient;
 
-        var ccustomMsg = req.body.txtCustomMsg;
-        var ccustomFrom = req.body.txtCustomFrom;
-        var cfromGroup = req.body.txtFromGroup;
-        var ccallback = req.body.txtCallback;
-        var cclient = req.body.txtClient;
-
+        // combine fields to make text message
         textMsg = ccustomMsg + " If you have any questions please call us at " + ccallback + ". Message sent by " +
         ccustomFrom + " " + cfromGroup;
 
-        console.log(textMsg);
-
+        // save page name for returning back to from preview page
+        returnpage = 'message';
         res.render('preview', { title:textMsg });
 
     }  // if errors
-
 }); // app.post
 
+//  submit button on reminder page
 app.post('/submitrem', function(req, res){
     console.log("post submitrem");
 
+    // do data validation
     req.checkBody('txtRStandardMsg', 'Standard message is required').notEmpty();
     req.checkBody('txtRCallback', 'Callback number is required').notEmpty();
     req.checkBody('txtRClient', 'Client number is required').notEmpty();
 
+    // check for errors in data entry
     var rerrors = req.validationErrors();
 
     if (rerrors) {
-        errmsgs = "Error: Must provide all required fields";
-        console.log(errmsgs);
+        errmsgs = "Please provide all required fields";
         // display error warning popup window
-        dialog.info('Please provide all required fields.');
+        dialog.warn(errmsgs, "Errors:" );
 
     } else {
 
+        // save values from reminder page
         var rcustomMsg = req.body.txtRCustomMsg;
         var rstandardMsg = req.body.txtRStandardMsg;
         var rcustomFrom = req.body.txtRCustomFrom;
@@ -134,29 +150,25 @@ app.post('/submitrem', function(req, res){
 
         // Format date from yyyy-mm-dd to m-d-yy
         var tempDate = req.body.txtRAppDate + " MST";
-        console.log("yyyy-mm-dd txtRAppDate + MST = ", tempDate);
         var rappDate = dateformat(tempDate, 'shortDate');
-        console.log("m-d-yyyy appDate=", rappDate);
 
         // Format time from 24 military, i.e. 17:30 to 9:30pm
-        console.log("txtRAppTime= ", req.body.txtRAppTime);
         var tempDteTime = ('2018-01-01' + "T" + req.body.txtRAppTime);
-        console.log("2018-01-01 + T + txtRAppTime =", tempDteTime);
         var rappTime = moment.tz(tempDteTime, "America/Phoenix").format('h:ma');
-        console.log("moment rappTime= ", rappTime);
 
+        // combine fields to make text message
         textMsg = rcustomMsg + " " + rstandardMsg + rappDate + " at " + rappTime + "." +
         " If you have any questions please call us at " + rcallback + ". Message sent by " +
             rcustomFrom + " " + rfromGroup;
 
-        console.log(textMsg);
-
+        // save page name for returning to it from preview page
+        returnpage = 'reminder';
         res.render('preview', { title: textMsg });
 
     } // if errors
 }); // app.post submitrem
 
-
+// Send text message via Twillio
 app.post('/send', function(req, res, next) {
     console.log("post /send");
     console.log("textMsg = " + textMsg);
@@ -167,16 +179,21 @@ app.post('/send', function(req, res, next) {
     })
         .then((message) => console.log(message.sid))
 
-    res.render('index');
-
+    // return to the page that called the Send Text
+    res.render(returnpage);
 });
 
+// Go back to home page
 app.get('/home', function(req, res, next) {
-    console.log("get /home");
     res.render('index');
-
 });
 
+// Cancel button on Preview Page - restore saved values back to message page
+// Need logic added to do the same for the reminder page
+app.get('/cancelpreview', function(req, res, next) {
+    console.log("ccustomMsg = ", ccustomMsg);
+    res.render(returnpage,{ccustomMsg:ccustomMsg, ccallback:ccallback,cfromGroup:cfromGroup, ccustomFrom:ccustomFrom, cclient:cclient});
+});
 
 app.listen(3000, function() {
     console.log('app.js-server started on port 3000');

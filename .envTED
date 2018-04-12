@@ -1,0 +1,6 @@
+DB_USER=app-user-00
+DB_PWD=e9Jfo3DrV5pYt53U
+db_name=fswf-msgapp
+db_string=mongodb://app-user-00:e9Jfo3DrV5pYt53U@cluster0-shard-00-00-kwcxq.mongodb.net:27017,cluster0-shard-00-01-kwcxq.mongodb.net:27017,cluster0-shard-00-02-kwcxq.mongodb.net:27017/fswf-msgapp?ssl=true&replicaSet=Cluster0-shard-0&authSource=admin
+TWILIO_SID=ACce902923a05ff8ce42c3a9bc39acca48
+TWILIO_AUTH=7d490bc8d0a18f0c35270c841bb7dc24

@@ -3,12 +3,13 @@ html
   head
     title= 'from layout.pug'
     link(rel='shortcut icon', href='/favicon.ico', type='image/x-icon')
-    //link(rel='icon', href='/favicon.ico', type='image/x-icon')
+    link(rel='icon', href='/favicon.ico', type='image/x-icon')
+    // required order is as follows: jquery then bootstrap then bootbox
+    script(src='https://ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js')
     link(href='//netdna.bootstrapcdn.com/bootstrap/3.1.1/css/bootstrap.min.css', rel='stylesheet')
+    script(src='bootstrap.min.js')
+    script(src='bootbox.min.js')
     link(rel='stylesheet', type='text/css', href='css/style.css')
-
-    script(src='dist/popupS.min.js')
-    link(rel='stylesheet', type='text/css', href='css/popupS.min.css')
 
   body
     block content
