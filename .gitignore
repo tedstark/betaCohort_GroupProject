@@ -57,9 +57,6 @@ typings/
 # Joans dotenv environment variables file
 .env
 
-# Teds dotenv environment variables file
-.envTED
-
 # next.js build output
 .next
 
