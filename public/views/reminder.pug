@@ -15,36 +15,36 @@ block content
             .col-md-2.card.box
                 .cp * Standardized Reminder Messages
             .col-md-6.card.box
-                select(name='txtRStandardMsg', size='0')
+                select(name='txtRStandardMsg', value=standardMsg, size='0')
                     option(value='This is a reminder for your appointment on ') This is a reminder for your appointment on
                     option(value='This is a reminder to bring the necessary documents to your next appointment on ') This is a reminder to bring the necessary documents to your next appointment on
             .col-md-3
         p
-            .row
-                .col-md-1
-                .col-md-2.card.box
-                    .cp * Appointment Date
-                .col-md-2.card.box
-                    input(name='txtRAppDate', type='date')
-                .col-md-2.card.box
-                    .cp * Appointment Time
-                .col-md-2.card.box
-                    input(name='txtRAppTime', type='time', value='08:30:00', step='900')
-                .col-md-5
-       p
+        .row
+            .col-md-1
+            .col-md-2.card.box
+                .cp * Appointment Date
+            .col-md-2.card.box
+                input(name='txtRAppDate', value=appDate, type='date')
+            .col-md-2.card.box
+                .cp * Appointment Time
+            .col-md-2.card.box
+                input(name='txtRAppTime', type='time', value='08:30:00', step='900')
+            .col-md-5
+        p
         .row
             .col-md-1
             .col-md-2.card.box
                 .cp Custom Message
             .col-md-9.card.box
-                input(name='txtRCustomMsg', type='text', placeholder='Enter custom message')
+                input(name='txtRCustomMsg', type='text', value=customMsg, placeholder='Enter custom message')
         p
         .row
             .col-md-1
             .col-md-2.card.box
                 .cp Message From Group
             .col-md-6.card.box
-                select(name='txtRFromGroup', size='0')
+                select(name='txtRFromGroup', value=fromGroup,  size='0')
                     option(value='Fresh Start') Fresh Start
                     option(value='Social Services') Social Services
                     option(value='Family Law') Family Law
@@ -55,7 +55,7 @@ block content
             .col-md-2.card.box
                 .cp From Name
             .col-md-6.card.box
-                input(name='txtRCustomFrom', type='text', placeholder='Enter additional from name (optional)')
+                input(name='txtRCustomFrom', value=customFrom, type='text', placeholder='Enter additional from name (optional)')
             .col-md-3
         p
         .row
@@ -63,16 +63,17 @@ block content
             .col-md-2.card.box
                 .cp * Message Callback Number
             .col-md-6.card.box
-                input(name='txtRCallback', type='number', placeholder='Enter callback number')
+                input(name='txtRCallback', value=callback, type='number', placeholder='Enter callback number')
             .col-md-3
         p
-            row
-                .col-md-1
-                .col-md-2.card.box
-                    .cp * Client's Phone Number
-                .col-md-2.card.box
-                    input(name='txtRClient', type='number', placeholder="Enter Client's phone number")
-                .col-md-7
+        .row
+            .col-md-1
+            .col-md-2.card.box
+                .cp * Client's Phone Number
+            .col-md-2.card.box
+                input(name='txtRClient', value=clientcell, type='number', placeholder="Enter Client's phone number")
+            .col-md-7
+        p
         .row
             .col-md-1
             .col-md-1.card.box

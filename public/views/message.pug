@@ -17,14 +17,14 @@ block content
             .col-md-2.card.box
                 .cp * Message
             .col-md-9.card.box
-                input(name='txtCustomMsg', type='text', value=ccustomMsg, placeholder='-your message-')
+                input(name='txtCustomMsg', type='text', value=customMsg, placeholder='-your message-')
        p
        .row
             .col-md-1
             .col-md-2.card.box
                 .cp Message From Group
             .col-md-6.card.box
-                select(name='txtFromGroup', size='0', value=cfromGroup)
+                select(name='txtFromGroup', size='0', value=fromGroup)
                     option(value='Fresh Start') Fresh Start
                     option(value='Social Services') Social Services
                     option(value='Family Law') Family Law
@@ -35,7 +35,7 @@ block content
             .col-md-2.card.box
                 .cp From Name
             .col-md-6.card.box
-                input(name='txtCustomFrom', type='text', value=ccustomFrom, placeholder='-additional from-')
+                input(name='txtCustomFrom', type='text', value=customFrom, placeholder='-additional from-')
             .col-md-3
        p
        .row
@@ -43,7 +43,7 @@ block content
             .col-md-2.card.box
                 .cp * Message Callback Number
             .col-md-6.card.box
-                input(name='txtCallback', type='number', value=ccallback, placeholder='-callback number-')
+                input(name='txtCallback', type='number', value=callback, placeholder='-callback number-')
             .col-md-3
        p
        .row
@@ -51,7 +51,7 @@ block content
             .col-md-2.card.box
                 .cp * Client's Phone Number
             .col-md-2.card.box
-                input(name='txtClient', type='number', value=cclient, placeholder='-clients phone number-')
+                input(name='txtClient', type='number', value=clientcell, placeholder='-clients phone number-')
             .col-md-7
        p
        .row
@@ -62,3 +62,4 @@ block content
 
     form(method='GET', action='/home')
        button#btnHome.btn.btn-default back
+

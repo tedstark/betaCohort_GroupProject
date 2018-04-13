@@ -1,2 +1,24 @@
 this is a test of using GitHub in a team
 
+const accountSid = 'ACbba27afc23b7049bdd547dc86724bc78';
+const authToken = '8e0a742139f4dd93463afcc1d9ba6098';
+
+
+
+    form(method='POST', action='/send')
+        h3 Please confirm text message.
+        p
+        h4= textMsg
+        p
+        button#btnSend.btn.btn-success Send Text
+
+    form(method='GET', action='/cancelpreview')
+        p
+        p
+        button#btnBack.btn.btn-default Cancel
+
+    form(method='GET', action='/home')
+        p
+        p
+        button#btnHome.btn.btn-default home page
+

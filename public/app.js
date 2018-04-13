@@ -6,8 +6,6 @@ const path = require('path');
 const dateformat = require('dateformat');
 const moment = require('moment-timezone');
 const dialog = require('dialog');
-// const accountSid = TWILIO_SID;
-// const authToken = TWILIO_AUTH;
 const client = require('twilio')(accountSid, authToken);
 
 
@@ -16,11 +14,14 @@ app.use(function(req, res, next){
    res.locals.errors = "";
    res.locals.textMsg = "";
    res.locals.returnpage = "";
-   res.locals.ccustomMsg = "";
-   res.locals.ccustomFrom = "";
-   res.locals.cfromGroup = "";
-   res.locals.ccallback = "";
-   res.locals.cclient = "";
+   res.locals.customMsg = "";
+   res.locals.customFrom = "";
+   res.locals.fromGroup = "";
+   res.locals.callback = "";
+   res.locals.clientcell = "";
+   res.locals.standardMsg = "";
+   res.locals.appDate = "";
+   res.locals.appTime = "";
    next();
 });
 
@@ -99,23 +100,23 @@ app.post('/submitcus', function(req, res){
     if (cerrors) {
         errmsgs = "Please provide all required fields";
         // display error warning popup window
-        dialog.warn(errmsgs, "Errors:" );
+        dialog.err(errmsgs, "Errors:" );
 
     } else {
         // save field values from page
-        ccustomMsg = req.body.txtCustomMsg;
-        ccustomFrom = req.body.txtCustomFrom;
-        cfromGroup = req.body.txtFromGroup;
-        ccallback = req.body.txtCallback;
-        cclient = req.body.txtClient;
+        customMsg = req.body.txtCustomMsg;
+        customFrom = req.body.txtCustomFrom;
+        fromGroup = req.body.txtFromGroup;
+        callback = req.body.txtCallback;
+        clientcell = req.body.txtClient;
 
         // combine fields to make text message
-        textMsg = ccustomMsg + " If you have any questions please call us at " + ccallback + ". Message sent by " +
-        ccustomFrom + " " + cfromGroup;
+        textMsg = customMsg + " If you have any questions please call us at " + callback + ". Message sent by " +
+        customFrom + " " + fromGroup;
 
         // save page name for returning back to from preview page
         returnpage = 'message';
-        res.render('preview', { title:textMsg });
+        res.render('preview', { textMsg });
 
     }  // if errors
 }); // app.post
@@ -135,35 +136,34 @@ app.post('/submitrem', function(req, res){
     if (rerrors) {
         errmsgs = "Please provide all required fields";
         // display error warning popup window
-        dialog.warn(errmsgs, "Errors:" );
+        dialog.err(errmsgs, "Errors:" );
 
     } else {
 
         // save values from reminder page
-        var rcustomMsg = req.body.txtRCustomMsg;
-        var rstandardMsg = req.body.txtRStandardMsg;
-        var rcustomFrom = req.body.txtRCustomFrom;
-        var rfromGroup = req.body.txtRFromGroup;
-        var rcallback = req.body.txtRCallback;
-        var rclient = req.body.txtRClient;
-
+        customMsg = req.body.txtRCustomMsg;
+        standardMsg = req.body.txtRStandardMsg;
+        customFrom = req.body.txtRCustomFrom;
+        fromGroup = req.body.txtRFromGroup;
+        callback = req.body.txtRCallback;
+        clientcell = req.body.txtRClient;
 
         // Format date from yyyy-mm-dd to m-d-yy
         var tempDate = req.body.txtRAppDate + " MST";
-        var rappDate = dateformat(tempDate, 'shortDate');
+        appDate = dateformat(tempDate, 'shortDate');
 
         // Format time from 24 military, i.e. 17:30 to 9:30pm
         var tempDteTime = ('2018-01-01' + "T" + req.body.txtRAppTime);
-        var rappTime = moment.tz(tempDteTime, "America/Phoenix").format('h:ma');
+        appTime = moment.tz(tempDteTime, "America/Phoenix").format('h:ma');
 
         // combine fields to make text message
-        textMsg = rcustomMsg + " " + rstandardMsg + rappDate + " at " + rappTime + "." +
-        " If you have any questions please call us at " + rcallback + ". Message sent by " +
-            rcustomFrom + " " + rfromGroup;
+        textMsg = customMsg + " " + standardMsg + appDate + " at " + appTime + "." +
+        " If you have any questions please call us at " + callback + ". Message sent by " +
+            customFrom + " " + fromGroup;
 
         // save page name for returning to it from preview page
         returnpage = 'reminder';
-        res.render('preview', { title: textMsg });
+        res.render('preview', { textMsg });
 
     } // if errors
 }); // app.post submitrem
@@ -171,13 +171,27 @@ app.post('/submitrem', function(req, res){
 // Send text message via Twillio
 app.post('/send', function(req, res, next) {
     console.log("post /send");
-    console.log("textMsg = " + textMsg);
+
+    // would be changed as follows:
+    //    to: clientcell
+    //    from: env variable for twillio approved number
+    // will display a popup window that text was sent - display sid
+    // **** SOMETIMES THIS IS SLOW TO DISPLAY - TWILLIO TEST SERVER SLOWER??
     client.messages.create({
         to: '+14802720635',
         from: '+14803729908',
         body: textMsg
     })
-        .then((message) => console.log(message.sid))
+        .then((message) => dialog.info('Text has been sent. ' + '/n' + 'SID Code: ' + message.sid, 'Text Confirmation'));
+
+    // was hoping this sent back a call log list - not sure what Twillio uses this for
+    // something to investigate further??
+    client.messaging.services.list()
+        .then(function(response) {
+            console.log("client.messaging response = ", response);
+        }).catch(function(error) {
+        console.log("client.messageing error = ", error);
+    });
 
     // return to the page that called the Send Text
     res.render(returnpage);
@@ -191,9 +205,33 @@ app.get('/home', function(req, res, next) {
 // Cancel button on Preview Page - restore saved values back to message page
 // Need logic added to do the same for the reminder page
 app.get('/cancelpreview', function(req, res, next) {
-    console.log("ccustomMsg = ", ccustomMsg);
-    res.render(returnpage,{ccustomMsg:ccustomMsg, ccallback:ccallback,cfromGroup:cfromGroup, ccustomFrom:ccustomFrom, cclient:cclient});
-});
+
+    if (returnpage == "messages") {
+        // **** NEED TO GET DROP DOWN fromGroup TO RESET TO SAVED VALUE
+        res.render(returnpage, {
+            customMsg: customMsg,
+            callback: callback,
+            fromGroup: fromGroup,
+            customFrom: customFrom,
+            clientcell: clientcell
+        });
+
+    } else {
+        // display reminder page
+        // **** NEED TO GET DROP DOWNS TO RESET TO SAVED VALUE
+        // **** NEED TO GET DATE & TIME TO RESET TO SAVED VALUE
+        res.render(returnpage, {
+            standardMsg: standardMsg,
+            customMsg: customMsg,
+            callback: callback,
+            fromGroup: fromGroup,
+            customFrom: customFrom,
+            clientcell: clientcell,
+            appTime: appTime,
+            appDate: appDate
+        });
+    }
+    });
 
 app.listen(3000, function() {
     console.log('app.js-server started on port 3000');
