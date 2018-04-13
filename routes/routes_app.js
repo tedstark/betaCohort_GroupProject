@@ -3,7 +3,7 @@ const router = express.Router();
 const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
-//Routes
+//App Routes
 
     // DOM: Show 'Home' Page
     router.get('/login2', function(req,res){

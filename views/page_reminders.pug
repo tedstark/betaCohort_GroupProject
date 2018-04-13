@@ -6,21 +6,17 @@ block content
             h1 #{title}
             br
             form(id="twilioForm" role='form' method='POST' action='/twilio/reminders')
-                label(for='standardMsg') Standard Reminder:
-                select(name="standardMsg" size="0")
+                label(for='txtStdRmndr') Standard Reminder:
+                select(name="txtStdRmndr" size="0")
                     option(disabled='', selected='', value='')  -- Select a Reminder Message -- 
                     option(value='This is a reminder for your upcoming FSWF appt.')
                         | This is a reminder for your upcoming FSWF appt.    
-                    option(value='This is a reminder to bring the necessary documents to your next FSWF appt.')
-                        | This is a reminder to bring the necessary documents to your next appointment.    
+                    option(value='This is a reminder to bring your documents to your next FSWF appt.')
+                        | This is a reminder to bring your documents to your next FSWF appt.    
                 br
                 br
-                label(for='txtCustomMsg') Custom Message:
-                input(name='txtCustomMsg' type='text' placeholder='Enter Message Body...' size='35')
-                //- br
-                //- br
-                //- label(for='txtCustomFrom') Client Appt Date/Time:
-                //- input(name='' type='datetime-local')
+                label(for='txtCustomRem') Custom Message:
+                input(name='txtCustomRem' type='text' placeholder='Enter Message Body...' size='35')
                 br
                 br
                 label(for='txtApptDate') Appointment Date:
@@ -38,13 +34,13 @@ block content
                 label(for='txtFromGrp') From Group:
                 select(name='txtFromGrp', size='0')
                     option(disabled='', selected='', value='')  -- Select a Group -- 
-                    option(value='Fresh Start') Fresh Start Women's Foundation
-                    option(value='Social Services') FSWF Social Services
-                    option(value='Family Law') FSWF Family Law
+                    option(value="Fresh Start Women's Foundation") Fresh Start Women's Foundation
+                    option(value='FSWF Social Services') FSWF Social Services
+                    option(value='FSWF Family Law') FSWF Family Law
                 br
                 br
-                label(for='txtClient') Client #:
-                input(name='txtClient' type='number' placeholder='Client Phone...' data-field=0)
+                label(for='txtClient1') Client #:
+                input(name='txtClient1' type='number' placeholder='Client Phone...' data-field=0)
                 br
                 br
                 label(for='txtCallback') FSWF Contact #:
@@ -53,3 +49,4 @@ block content
                 br
                 input(type="submit", value="Submit Text")
                 input.clrForm(type="button", value="Reset Form")
+            br

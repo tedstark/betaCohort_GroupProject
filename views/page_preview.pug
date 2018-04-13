@@ -1,0 +1,12 @@
+extends layout
+
+block content
+    .container
+        br
+        form(method='POST', action='/send')
+            h3 Please confirm text message:
+            br
+            h5 #{textPreview}
+            p
+            button#btnSend.btn.btn-success Send Text
+            button#btnBack.btn.btn-default Cancel/Edit Text

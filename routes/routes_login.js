@@ -24,7 +24,7 @@ let User = require('../models/user');
       passport.authenticate('local', {
         successRedirect: '/login/disclaimer',
         failureRedirect: '/',
-        badRequestMessage: 'Please enter username and password.', //Default: Missing credentials
+        badRequestMessage: 'Please enter username and password.',
         failureFlash: true
       })
       (req,res,next);

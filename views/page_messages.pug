@@ -5,9 +5,13 @@ block content
         .container
             h1 #{title}
             br
-            form(id="twilioForm" role='form' method='POST' action='/twilio/multimsgs')
+            form(id="twilioForm" role='form' method='POST' action='/twilio/messages')
                 label(for='txtCustomMsg') Personalized Message:
                 input(name='txtCustomMsg' type='text' placeholder='Enter Message Body...' size='35')
+                br
+                br      
+                label(for='txtCustomFrom') From:
+                input(name='txtCustomFrom' type='text' placeholder='From...' size='35')
                 br
                 br
                 label(for='txtFromGrp') From Group:
@@ -16,10 +20,6 @@ block content
                     option(value="Fresh Start Women's Foundation") Fresh Start Women's Foundation
                     option(value='Social Services') FSWF Social Services
                     option(value='Family Law') FSWF Family Law
-                br
-                br      
-                label(for='txtCustomFrom') From:
-                input(name='txtCustomFrom' type='text' placeholder='From...' size='35')
                 br
                 br
                 label(for='txtClient1') To #:

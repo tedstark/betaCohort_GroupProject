@@ -13,20 +13,6 @@ function enable () {
   deleteUser();
 }
 
-// Adds additional 'To #' Field on Messages page'
-function addNumFields () {
-  $('.multiFieldWrapper').each(function() {
-      $('.multiField:first-child .removeNum', $('.multiFields', this)).attr('hidden',false)
-      $('.multiField:first-child', $('.multiFields', this)).clone(true).appendTo($('.multiFields', this)).find('input').val('').focus();
-      $('.multiField:first-child .removeNum', $('.multiFields', this)).attr('hidden',true)
-  });
-}
-
-
-function remNumFields () {
-  $(this).parent('.multiField').remove();
-}
-
 // Reset Form Button
 function clrForm() {
     document.getElementById("twilioForm").reset();
@@ -50,4 +36,17 @@ $('.delete-user').on('click', function (user) {
           }
       });
   });
+}
+
+// Adds additional 'To #' Field on Messages page'
+function addNumFields () {
+  $('.multiFieldWrapper').each(function() {
+      $('.multiField:first-child .removeNum', $('.multiFields', this)).attr('hidden',false)
+      $('.multiField:first-child', $('.multiFields', this)).clone(true).appendTo($('.multiFields', this)).find('input').val('').focus();
+      $('.multiField:first-child .removeNum', $('.multiFields', this)).attr('hidden',true)
+  });
+}
+
+function remNumFields () {
+  $(this).parent('.multiField').remove();
 }
