@@ -6,8 +6,9 @@ const path = require('path');
 const dateformat = require('dateformat');
 const moment = require('moment-timezone');
 const dialog = require('dialog');
-const client = require('twilio')(accountSid, authToken);
+// copy twilio constants and TO/FROM numbers here - env file not working
 
+const client = require('twilio')(accountSid, authToken);
 
 // Global Variables
 app.use(function(req, res, next){
@@ -93,6 +94,8 @@ app.post('/submitcus', function(req, res){
     req.checkBody('txtCustomMsg', 'Custom message is required').notEmpty();
     req.checkBody('txtCallback', 'Callback number is required').notEmpty();
     req.checkBody('txtClient', 'Client number is required').notEmpty();
+    //req.checkBody('txtClient', 'Client number is required').notNumeric();
+   // req.checkBody('txtClient', 'Client number is required').isMobilePhone({options:['en-US']});
 
     // check for errors in data entry
     var cerrors = req.validationErrors();
@@ -129,14 +132,17 @@ app.post('/submitrem', function(req, res){
     req.checkBody('txtRStandardMsg', 'Standard message is required').notEmpty();
     req.checkBody('txtRCallback', 'Callback number is required').notEmpty();
     req.checkBody('txtRClient', 'Client number is required').notEmpty();
+   // req.checkBody('txtRClient', 'Client number is required').notNumeric();
+   // req.checkBody('txtRClient', 'Client number is required').isMobilePhone({options:['en-US']});
+
 
     // check for errors in data entry
     var rerrors = req.validationErrors();
 
     if (rerrors) {
-        errmsgs = "Please provide all required fields";
+        errmsgs = 'Please provide all required fields';
         // display error warning popup window
-        dialog.err(errmsgs, "Errors:" );
+        dialog.err(errmsgs, 'Errors:' );
 
     } else {
 
@@ -176,16 +182,17 @@ app.post('/send', function(req, res, next) {
     //    to: clientcell
     //    from: env variable for twillio approved number
     // will display a popup window that text was sent - display sid
-    // **** SOMETIMES THIS IS SLOW TO DISPLAY - TWILLIO TEST SERVER SLOWER??
+    // **** SOMETIMES SENT DIALOG SLOW TO DISPLAY - TWILLIO TEST SERVER SLOWER??
     client.messages.create({
-        to: '+14802720635',
-        from: '+14803729908',
+        to: TEST_TO,
+        from: TEST_FROM,
         body: textMsg
     })
         .then((message) => dialog.info('Text has been sent. ' + '/n' + 'SID Code: ' + message.sid, 'Text Confirmation'));
 
     // was hoping this sent back a call log list - not sure what Twillio uses this for
     // something to investigate further??
+    // got some errors from this during testing - might be used to confirm delivery?
     client.messaging.services.list()
         .then(function(response) {
             console.log("client.messaging response = ", response);
@@ -203,7 +210,6 @@ app.get('/home', function(req, res, next) {
 });
 
 // Cancel button on Preview Page - restore saved values back to message page
-// Need logic added to do the same for the reminder page
 app.get('/cancelpreview', function(req, res, next) {
 
     if (returnpage == "messages") {
