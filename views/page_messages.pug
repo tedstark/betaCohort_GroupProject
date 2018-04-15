@@ -5,7 +5,7 @@ block content
         .container
             h1 #{title}
             br
-            form(id="twilioForm" role='form' method='POST' action='/twilio/messages')
+            form(id="twilioForm" role='form' method='POST' action='/messages/send')
                 label(for='txtCustomMsg') Personalized Message:
                 input(name='txtCustomMsg' type='text' placeholder='Enter Message Body...' size='35')
                 br
@@ -22,11 +22,11 @@ block content
                     option(value='Family Law') FSWF Family Law
                 br
                 br
-                label(for='txtClient1') To #:
+                label(for='txtClient1') Client #:
                 input.msgToNum(name='txtClient1' type='number' placeholder='Client Phone #1...' maxlength="10")
                 br
                 br
-                label(for='txtCallback') Callback #:
+                label(for='txtCallback') FSWF Contact #:
                 input(name='txtCallback', type='number' placeholder='Callback Phone...')
                 br
                 br

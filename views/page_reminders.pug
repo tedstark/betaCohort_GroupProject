@@ -5,7 +5,7 @@ block content
         .container
             h1 #{title}
             br
-            form(id="twilioForm" role='form' method='POST' action='/twilio/reminders')
+            form(id="twilioForm" role='form' method='POST' action='/reminders/send')
                 label(for='txtStdRmndr') Standard Reminder:
                 select(name="txtStdRmndr" size="0")
                     option(disabled='', selected='', value='')  -- Select a Reminder Message -- 
@@ -15,8 +15,8 @@ block content
                         | This is a reminder to bring your documents to your next FSWF appt.    
                 br
                 br
-                label(for='txtCustomRem') Custom Message:
-                input(name='txtCustomRem' type='text' placeholder='Enter Message Body...' size='35')
+                label(for='txtCstmRmndr') Custom Message:
+                input(name='txtCstmRmndr' type='text' placeholder='Enter Message Body...' size='35')
                 br
                 br
                 label(for='txtApptDate') Appointment Date:

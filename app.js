@@ -95,13 +95,15 @@ app.set('view engine', 'pug');
 // Routes
   // Route variables
   let twilioRouter = require('./routes/routes_twilio');
+  let rmndrRouter = require('./routes/routes_reminders');
+  let msgRouter = require('./routes/routes_messages');
   let usersRouter = require('./routes/routes_users');
   let appRouter = require('./routes/routes_app');
   let loginRouter = require('./routes/routes_login');
 
   // Route statements
-  // app.use('/messages', appRouter);
-  // app.use('/reminders', appRouter);
+  app.use('/messages', msgRouter);
+  app.use('/reminders', rmndrRouter);
   app.use('/users', usersRouter);
   app.use('/login', loginRouter);
   app.use('/twilio', twilioRouter);

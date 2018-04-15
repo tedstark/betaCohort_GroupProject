@@ -12,19 +12,19 @@ const passport = require('passport');
         });
     });
 
-    // DOM: Show 'Reminders' Page
-    router.get('/reminders', function(req,res){
-        res.render('page_reminders', {
-          title: 'Send a Reminder'
-        });
-    });
-
-    // DOM: Show 'Messages' Page
-    router.get('/messages', function(req,res){
-        res.render('page_messages', {
-          title: 'Send a Message'
-        });
-    });
+    // // DOM: Show 'Reminders' Page
+    // router.get('/reminders', function(req,res){
+    //     res.render('page_reminders', {
+    //       title: 'Send a Reminder'
+    //     });
+    // });
+    //
+    // // DOM: Show 'Messages' Page
+    // router.get('/messages', function(req,res){
+    //     res.render('page_messages', {
+    //       title: 'Send a Message'
+    //     });
+    // });
 
     // DOM: Show '/' Page
     router.get('/', function(req,res){
