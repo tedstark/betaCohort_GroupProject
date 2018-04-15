@@ -23,12 +23,12 @@ router.use(bodyParser.urlencoded({ extended: false }));
         });
     });
 
-//     // DOM: Show 'Reminders' Page
-//     router.get('/preview', function(req,res){
-//         res.render('page_preview', {
-//             title: 'Preview Reminder Message'
-//         });
-//     });
+//     // DOM: Show Preview Page for Reminder
+    router.get('/preview', function(req,res){
+        res.render('page_preview', {
+            title: 'Reminder Preview'
+        });
+    });
 //
 // // POST: Format Reminder message and show preview page
 //     router.post('/preview', function(req, res) {

@@ -21,7 +21,11 @@ html
                             a.nav-link(href='/reminders') Reminders
                         li.nav-item
                             a.nav-link(href='/messages') Messages
-                        if user.role=='admin'    
+                        li.nav-item
+                            a.nav-link(href='/monkey') Monkey
+                        li.nav-item
+                            a.nav-link(href='/reminders/preview') Preview
+                        if user.role=='admin'
                             li.nav-item
                                 a.nav-link(href='/users/list') All Users
                             li.nav-item

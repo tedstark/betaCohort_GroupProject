@@ -1,8 +1,7 @@
-extends layout
+extends page_layout2
 
 block content
     .container
-        br
         form(method='POST', action='/send')
             h3 Please confirm text message:
             br
@@ -10,3 +9,10 @@ block content
             p
             button#btnSend.btn.btn-success Send Text
             button#btnBack.btn.btn-default Cancel/Edit Text
+        br
+        if user
+            h5 You can see this because you're logged in.
+        br
+        if user && user.role == 'admin'
+            h5 You can see this because you're an admin.
+            h5 #{title}

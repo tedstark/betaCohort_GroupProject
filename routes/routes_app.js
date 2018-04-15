@@ -12,6 +12,19 @@ const passport = require('passport');
         });
     });
 
+    // DOM: Show 'Monkey' Page
+    router.get('/monkey', function(req,res){
+        res.render('monkey', {
+            title: 'Monkey Test'
+        });
+    });
+
+    // DOM: Show 'Preview' Page
+    router.get('/preview', function(req,res){
+        res.render('page_preview', {
+            title: 'Preview Page'
+        });
+    });
     // // DOM: Show 'Reminders' Page
     // router.get('/reminders', function(req,res){
     //     res.render('page_reminders', {

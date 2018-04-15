@@ -1,0 +1,10 @@
+extends page_layout2
+
+block content
+    .container
+        if user
+            h1 This is a Test!
+        br
+        if user && user.role == 'admin'
+            h2 #{title}
+        br
