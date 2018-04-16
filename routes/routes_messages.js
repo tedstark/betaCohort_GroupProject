@@ -1,8 +1,7 @@
 const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
-const dateformat = require('dateformat');
-const moment = require('moment-timezone');
+
 
 require('dotenv').load();
 
@@ -18,17 +17,35 @@ router.use(bodyParser.urlencoded({ extended: false }));
 // Routes
     // DOM: Show 'Messages' Page
     router.get('/', function(req,res){
+        txtToPhone='';
+        txtFullMsg='';
         res.render('page_messages', {
             title: 'Send a Message'
         });
     });
+
+    // DOM: Show Preview Page for Messages
+    router.get('/preview', function(req,res){
+        res.render('page_preview', {
+            title: 'Message Preview'
+        });
+    });
+
+    // POST: Format Message and show preview page
+    router.post('/preview', function(req, res) {
+    txtToPhone = req.body.txtClient1;
+    txtFullMsg = req.body.txtCustomMsg+' Frm '+req.body.txtCustomFrom+'. '+req.body.txtFromGrp+'. Call '+req.body.txtCallback+' with questions.';
+    returnPage = 'messages';
+
+    res.redirect('/messages/preview');
+});
 
     // POST: Send a Message through Twilio service
     router.post('/send', function(req, res) {
         twilio.messages
             .create({
                 to: req.body.txtClient1,
-                from: '+16027867178',
+                from: env.TWILIO_NUM,
                 body: req.body.txtCustomMsg+' Frm '+req.body.txtCustomFrom+'. '+req.body.txtFromGrp+'. Call '+req.body.txtCallback+' with questions.'
             })
             .then(message => console.log(message.sid));

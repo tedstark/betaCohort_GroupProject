@@ -5,7 +5,7 @@ block content
         .container
             h1 #{title}
             br
-            form(id="txtForm" role='form' method='POST' action='/messages/send')
+            form(id="txtForm" role='form' method='POST' action='/messages/preview')
                 .form-group
                     label(for='txtCustomMsg') Personalized Message:
                     input.form-control(name='txtCustomMsg' type='text' placeholder='Enter Message Body...' size='35')

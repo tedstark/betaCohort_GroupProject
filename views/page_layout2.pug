@@ -23,8 +23,8 @@ html
                             a.nav-link(href='/reminders') Reminders
                         li.nav-item
                             a.nav-link(href='/messages') Messages
-                        li.nav-item
-                            a.nav-link(href='/preview') Preview
+                        //li.nav-item
+                        //    a.nav-link(href='/preview') Preview
                         if user.role=='admin'
                             li.nav-item
                                 a.nav-link(href='/users/list') All Users
@@ -44,7 +44,9 @@ html
                 br
                 h5 Please log in 
                     a(href="/") here
-            hr
-            footer.myfooter
-              p.copyright Copyright ©2018 Fresh Start Women's Foundation
-                  .container
+        hr
+        footer
+            .myfooter.monkey-l
+                p Copyright ©2018 Fresh Start Women's Foundation
+            .myfooter.monkey-r
+                p 2018/04/16.01
