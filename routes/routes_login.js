@@ -9,13 +9,15 @@ let User = require('../models/user');
 // User Routes
     // DOM: Show User Login block on page_home.pug
     router.get('/disclaimer',function (req,res) {
-      res.render('page_login2');
+      res.render('page_login2', {
+          title: 'Disclaimer:'
+      });
     });
 
     // DOM: User logout process; shows Home page with Login block upon logout
     router.get('/logout', function (req,res) {
         req.logout();
-        req.flash('success', 'You are logged out!');
+        req.flash('success alert-dismissible fade show', 'You are logged out!');
         res.redirect('/');
     });
 
@@ -28,7 +30,7 @@ let User = require('../models/user');
         failureFlash: true
       })
       (req,res,next);
-    })
+    });
 
 // Export statement
 module.exports=router;

@@ -25,6 +25,7 @@ const passport = require('passport');
             title: 'Preview Page'
         });
     });
+
     // // DOM: Show 'Reminders' Page
     // router.get('/reminders', function(req,res){
     //     res.render('page_reminders', {

@@ -52,7 +52,7 @@ let User = require('../models/user');
                   console.log(err);
                   return;
                 } else {
-                    req.flash('success', 'User '+user.username+' added!');
+                    req.flash('success alert-dismissible fade show', 'User '+user.username+' added!');
                     res.redirect('/users/list');
                   }
               });
@@ -113,7 +113,7 @@ let User = require('../models/user');
                 console.log(err);
                 return;
               } else {
-                  req.flash('success', 'User '+user.username+' Updated!');
+                  req.flash('success alert-dismissible fade show', 'User '+user.username+' Updated!');
                   res.redirect('/users/list');
                 }
             });

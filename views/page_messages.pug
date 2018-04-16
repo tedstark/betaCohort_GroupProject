@@ -5,29 +5,30 @@ block content
         .container
             h1 #{title}
             br
-            form(id="twilioForm" role='form' method='POST' action='/messages/send')
-                label(for='txtCustomMsg') Personalized Message:
-                input(name='txtCustomMsg' type='text' placeholder='Enter Message Body...' size='35')
+            form(id="txtForm" role='form' method='POST' action='/messages/send')
+                .form-group
+                    label(for='txtCustomMsg') Personalized Message:
+                    input.form-control(name='txtCustomMsg' type='text' placeholder='Enter Message Body...' size='35')
                 br
-                br      
-                label(for='txtCustomFrom') From:
-                input(name='txtCustomFrom' type='text' placeholder='From...' size='35')
+                .form-group
+                    label(for='txtCustomFrom') From:
+                    input.form-control(name='txtCustomFrom' type='text' placeholder='From...' size='35')
                 br
+                .form-group
+                    label(for='txtFromGrp') From Group:
+                    select.form-control(name='txtFromGrp', size='0')
+                        option(disabled='', selected='', value='')  -- Select a Group --
+                        option(value="Fresh Start Women's Foundation") Fresh Start Women's Foundation
+                        option(value='Social Services') FSWF Social Services
+                        option(value='Family Law') FSWF Family Law
                 br
-                label(for='txtFromGrp') From Group:
-                select(name='txtFromGrp', size='0')
-                    option(disabled='', selected='', value='')  -- Select a Group -- 
-                    option(value="Fresh Start Women's Foundation") Fresh Start Women's Foundation
-                    option(value='Social Services') FSWF Social Services
-                    option(value='Family Law') FSWF Family Law
+                .form-group
+                    label(for='txtClient1') Client #:
+                    input.form-control(name='txtClient1' type='number' placeholder='Client Phone #...' min='2111111111' max='9999999999')
                 br
-                br
-                label(for='txtClient1') Client #:
-                input.msgToNum(name='txtClient1' type='number' placeholder='Client Phone #1...' maxlength="10")
-                br
-                br
-                label(for='txtCallback') FSWF Contact #:
-                input(name='txtCallback', type='number' placeholder='Callback Phone...')
+                .form-group
+                    label(for='txtCallback') FSWF Contact #:
+                    input.form-control(name='txtCallback', type='number' placeholder='Callback Phone...' min='2111111111' max='9999999999')
                 br
                 br
                 input(type="submit", value="Submit Text")

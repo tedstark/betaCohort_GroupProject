@@ -5,18 +5,20 @@ block content
         .container
             h1 #{title}
             br
-            table.u-full-width
-              thead
-                  tr
-                      th Username
-                      th Role
-                      th
-              tbody
-                  each user, i in users
-                      tr
-                          td= user.username
-                              td= user.role
-                              td
-                                  a.btn.btn-info.btn-sm(href="/users/edit/"+user._id) Edit
-                                  if user.role!=='admin'
-                                      button.btn.btn-danger.btn-sm.delete-user(href='#', data-id=user._id) Delete
+            table.table
+                thead
+                    tr
+                        th(scope='col') #
+                        th(scope='col') Username
+                        th(scope='col') Role
+                        th(scope='col') Actions
+                tbody
+                    each user, i in users
+                        tr
+                            th(scope='row')= i+1
+                            td= user.username
+                            td= user.role
+                            td
+                              a.btn.btn-info.btn-sm(href="/users/edit/"+user._id) Edit
+                              if user.role!=='admin'
+                                  button.btn.btn-danger.btn-sm.delete-user(href='#', data-id=user._id) Delete

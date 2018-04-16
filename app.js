@@ -19,6 +19,10 @@ require('console-stamp')(console, 'HH:MM:ss');
 let app = express();
 let env = process.env;
 let db = mongoose.connection;
+let txtFullMsg = '';
+let txtToPhone = '';
+let returnPage = '';
+let txtSID = '';
 
 //Set Public folder path
 app.use(express.static(path.join(__dirname, 'public')));
@@ -29,11 +33,11 @@ app.use(express.static(path.join(__dirname, 'public')));
   //Check DB connection
   db.once('open', function(err){
     console.log('Connection made to Database: '+env.DB_NAME);
-  })
+  });
   //Check for DB errors
   db.on('error', function(err){
     console.log(err);
-  })
+  });
 
 // Load View Engine
 app.set('views', path.join(__dirname, 'views'));

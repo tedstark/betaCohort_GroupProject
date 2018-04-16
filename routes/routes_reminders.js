@@ -18,6 +18,8 @@ router.use(bodyParser.urlencoded({ extended: false }));
 // Routes
     // DOM: Show 'Reminders' Page
     router.get('/', function(req,res){
+        txtToPhone='';
+        txtFullMsg='';
         res.render('page_reminders', {
             title: 'Send a Reminder'
         });
@@ -30,30 +32,27 @@ router.use(bodyParser.urlencoded({ extended: false }));
         });
     });
 //
-// // POST: Format Reminder message and show preview page
-//     router.post('/preview', function(req, res) {
-//         // Do data validation
-//         req.checkBody('txtStdRmndr', 'Standard reminder is required').notEmpty();
-//         req.checkBody('txtApptDate', 'Appt. Date is required').notEmpty();
-//         req.checkBody('txtApptTime', 'Appt. Time is required').notEmpty();
-//         req.checkBody('txtFromGrp', 'Group is required').notEmpty();
-//         req.checkBody('txtClient1', 'Client Phone # is required').notEmpty();
-//         req.checkBody('txtCallback', 'Callback # is required').notEmpty();
-//         let errors = req.validationErrors();
-//
-//         let frmtdDate = dateformat((req.body.txtApptDate + ' MST'), 'shortDate');
-//         let tempTime = ('2018-01-01' + "T" + req.body.txtApptTime);
-//         let frmtdTime = moment.tz(tempTime, "America/Phoenix").format('h:mm a');
-//
-//         txtToPhone = req.body.txtClient1;
-//         txtFullMsg = req.body.txtStdRmndr+' '+req.body.txtCstmRmndr+' Your appt is '+frmtdDate+', '+frmtdTime+'. Frm '+req.body.txtCustomFrom+' '+req.body.txtFromGrp+'. Call '+req.body.txtCallback+' to make changes to your appt.';
-//         returnPage = 'reminder';
-//
-//         console.log(txtFullMsg);
-//         res.render('page_preview', {
-//             preview:txtFullMsg
-//         });
-//     });
+// POST: Format Reminder message and show preview page
+    router.post('/preview', function(req, res) {
+        // Do data validation
+        // req.checkBody('txtStdRmndr', 'Standard reminder is required').notEmpty();
+        // req.checkBody('txtApptDate', 'Appt. Date is required').notEmpty();
+        // req.checkBody('txtApptTime', 'Appt. Time is required').notEmpty();
+        // req.checkBody('txtFromGrp', 'Group is required').notEmpty();
+        // req.checkBody('txtClient1', 'Client Phone # is required').notEmpty();
+        // req.checkBody('txtCallback', 'Callback # is required').notEmpty();
+        // let errors = req.validationErrors();
+
+        let frmtdDate = dateformat((req.body.txtApptDate + ' MST'), 'shortDate');
+        let tempTime = ('2018-01-01' + "T" + req.body.txtApptTime);
+        let frmtdTime = moment.tz(tempTime, "America/Phoenix").format('h:mm a');
+
+        txtToPhone = req.body.txtClient1;
+        txtFullMsg = req.body.txtStdRmndr+' '+req.body.txtCstmRmndr+' Your appt is '+frmtdDate+', '+frmtdTime+'. Frm '+req.body.txtCustomFrom+' '+req.body.txtFromGrp+'. Call '+req.body.txtCallback+' to make changes to your appt.';
+        returnPage = 'reminders';
+
+        res.redirect('/reminders/preview');
+    });
 
     // POST: Send a Reminder through Twilio service
     router.post('/send', function(req, res) {
@@ -63,7 +62,7 @@ router.use(bodyParser.urlencoded({ extended: false }));
         twilio.messages
             .create({
                 to: req.body.txtClient1,
-                from: '+16027867178',
+                from: env.TWILIO_NUM,
                 body: req.body.txtStdRmndr+' '+req.body.txtCstmRmndr+' Your appt is '+frmtdDate+', '+frmtTime+'. Frm '+req.body.txtCustomFrom+', '+req.body.txtFromGrp+'. Call '+req.body.txtCallback+' to make changes to your appt.'
             })
             .then(message => console.log(message.sid));
