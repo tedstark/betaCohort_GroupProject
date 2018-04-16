@@ -13,11 +13,18 @@ block content
          input(type='submit')
          br
          label Time:
-         input(type='time', value='08:30:00', step='900')
+         input(type='time', value='09:00:00', step='900')
          br
          br
          | Mobile Number:
          input(type='number', min='2111111111', max='99999999999', name='mobile')
          br
+         | Custom Message:
+         input(type='text', name='custmessage', maxlength='122')
+         br
+         | Personalized Message:
+         input(type='text', name='permessage', maxlength='122')
+         br
+         //input(type='submit', value='Submit')
          input(type='submit', value='Submit')
          br
