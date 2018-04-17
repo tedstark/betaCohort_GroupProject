@@ -1,21 +1,22 @@
 extends page_layout2
 
 block content
-    .container
-        h1 #{title}
-        br
-        form(id="txtForm" role='form' method='POST' action='/twilio/send')
-            h3 Please confirm/edit recipient text message:
+    if user
+        .container
+            h1 #{title}
             br
-            .form-group
-                label(for='previewPhone') Client #:
-                input.form-control(name='previewPhone' type='number' placeholder='Client Phone...' min='2111111111' max='9999999999' value=txtToPhone)
+            hr
+            h4 Please confirm/edit recipient text message:
             br
-            .form-group
-                label(for='previewMessage') Custom Message:
-                textarea.previewMsg.form-control(name='previewMessage')= txtFullMsg
-                .previewMsg_Count
-            br
-            input.btn.btn-success.btn-sm(type='submit' value='Send Text')
-            a.button.btn.btn-info.btn-sm(type='button' href='/reminders') Cancel/Edit
+            form(id="txtForm" role='form' method='POST' action='/twilio/send')
+                .form-group
+                    label(for='previewPhone') Client #:
+                    input.form-control(name='previewPhone' type='text' placeholder='Client Phone...' min='2111111111' max='9999999999' value=txtToPhone)
+                .form-group
+                    label(for='previewMessage') Custom Message:
+                    textarea.previewMsg.form-control(name='previewMessage')= txtFullMsg
+                    .previewMsg_Count
+                br
+                input.btn.btn-success.btn-sm(type='submit' value='Send Text')
+                a.button.btn.btn-info.btn-sm(type='button' href='/reminders') Cancel/Edit
         br

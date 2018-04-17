@@ -1,0 +1,14 @@
+extends page_layout2
+
+block content
+  if user && user.role=='admin'
+        .container
+            h1 #{title}
+            br
+            form(role='form' method='POST' action='/groupdd/edit/'+groupddInForm._id)
+                .form-group
+                    label(for='groupName') Workgroup Name:
+                    input.form-control(class='u-full-width', name='groupName', type='text', placeholder='Group Name...' value=groupddInForm.name)
+                br
+                button.btn.btn-info(type='submit') Submit Changes
+            br

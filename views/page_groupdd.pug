@@ -1,0 +1,37 @@
+extends page_layout2
+
+block content
+    if user && user.role=='admin'
+        .container
+            h1 #{title}
+            br
+            hr
+            h4 Add a Workgroup:
+            br
+            form(role='form' method='POST' action='/groupdd/add')
+                .form-group
+                    //- label(for='groupName') Group Name:
+                    input.form-control(class='u-full-width', name='groupName', type='text', placeholder='New Group Name...')
+                br
+                input.btn.btn-info.btn-sm(type="submit", value="Submit Group")
+            br
+            hr
+        .container
+            br
+            h4 Current Workgroup List:
+            table.table
+                thead
+                    tr
+                        th(scope='col') #
+                        th(scope='col') Name
+                        th(scope='col') Active
+                        th(scope='col') Actions
+                tbody
+                    each groupdd, i in groupdds
+                        tr
+                            th(scope='row')= i+1
+                            td= groupdd.name
+                            td= groupdd.active
+                            td
+                                a.btn.btn-info.btn-sm(href="/groupdd/edit/"+groupdd._id) Edit
+                                button.btn.btn-danger.btn-sm.delete-group(href='#', data-id=groupdd._id) Delete

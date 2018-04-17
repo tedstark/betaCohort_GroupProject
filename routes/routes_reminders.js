@@ -5,8 +5,11 @@ const dateformat = require('dateformat');
 const moment = require('moment-timezone');
 
 require('dotenv').load();
-
 let env = process.env;
+
+// Bring in models
+let ReminderDD = require('../models/reminderdd');
+let GroupDD = require('../models/groupdd');
 
 // Require the Twilio module and create a REST client
 const twilio = require('twilio')(env.TWILIO_SID, env.TWILIO_AUTH);
@@ -20,8 +23,22 @@ router.use(bodyParser.urlencoded({ extended: false }));
     router.get('/', function(req,res){
         txtToPhone='';
         txtFullMsg='';
-        res.render('page_reminders', {
-            title: 'Send a Reminder'
+        GroupDD.find({}, function(err, groupdds){
+            if(err){
+                console.log(err);
+            } else {
+                ReminderDD.find({}, function(err, reminderdds){
+                    if(err){
+                        console.log(err);
+                    } else {
+                        res.render('page_reminders', {
+                            groupdds:groupdds,
+                            reminderdds:reminderdds,
+                            title: 'Send a Reminder'
+                        });
+                      }
+                });
+              }
         });
     });
 
@@ -32,7 +49,7 @@ router.use(bodyParser.urlencoded({ extended: false }));
         });
     });
 
-// POST: Format Reminder message and show preview page
+    // POST: Format Reminder message and show preview page
     router.post('/preview', function(req, res) {
         // Do data validation
         // req.checkBody('txtStdRmndr', 'Standard reminder is required').notEmpty();
@@ -42,32 +59,35 @@ router.use(bodyParser.urlencoded({ extended: false }));
         // req.checkBody('txtClient1', 'Client Phone # is required').notEmpty();
         // req.checkBody('txtCallback', 'Callback # is required').notEmpty();
         // let errors = req.validationErrors();
-
-        let frmtdDate = dateformat((req.body.txtApptDate + ' MST'), 'shortDate');
-        let tempTime = ('2018-01-01' + "T" + req.body.txtApptTime);
-        let frmtdTime = moment.tz(tempTime, "America/Phoenix").format('h:mm a');
-
-        txtToPhone = req.body.txtClient1;
-        txtFullMsg = req.body.txtStdRmndr+' '+req.body.txtCstmRmndr+' Your appt is '+frmtdDate+', '+frmtdTime+'. Frm '+req.body.txtCustomFrom+' '+req.body.txtFromGrp+'. Call '+req.body.txtCallback+' to make changes to your appt.';
-        returnPage = 'reminders';
-
-        res.redirect('/reminders/preview');
+        // if(errors){
+        //   // For Flash Messages
+        //     res.render('page_reminders',{
+        //         errors:errors
+        //     });
+        // } else {
+            let frmtdDate = dateformat((req.body.txtApptDate + ' MST'), 'shortDate');
+            let tempTime = ('2018-01-01' + "T" + req.body.txtApptTime);
+            let frmtdTime = moment.tz(tempTime, "America/Phoenix").format('h:mm a');
+            txtToPhone = req.body.txtClient1;
+            txtFullMsg = req.body.txtStdRmndr+' '+req.body.txtCstmRmndr+' Your appt is '+frmtdDate+', '+frmtdTime+'. From '+req.body.txtCustomFrom+' '+req.body.txtFromGrp+'. Call '+req.body.txtCallback+' to make changes to your appt.';
+            returnPage = 'reminders';
+            res.redirect('/reminders/preview');
+          // }
     });
 
     // POST: Send a Reminder through Twilio service
-    router.post('/send', function(req, res) {
-        let frmtdDate = dateformat((req.body.txtApptDate + ' MST'), 'shortDate');
-        let tempTime = ('2018-01-01' + "T" + req.body.txtApptTime);
-        let frmtTime = moment.tz(tempTime, "America/Phoenix").format('h:mm a');
-        twilio.messages
-            .create({
-                to: req.body.txtClient1,
-                from: env.TWILIO_NUM,
-                body: req.body.txtStdRmndr+' '+req.body.txtCstmRmndr+' Your appt is '+frmtdDate+', '+frmtTime+'. Frm '+req.body.txtCustomFrom+', '+req.body.txtFromGrp+'. Call '+req.body.txtCallback+' to make changes to your appt.'
-            })
-            .then(message => console.log(message.sid));
-        console.log('Reminder Sent!');
-        res.redirect('/reminders');
-    });
+    // router.post('/send', function(req, res) {
+    //     let frmtdDate = dateformat((req.body.txtApptDate + ' MST'), 'shortDate');
+    //     let tempTime = ('2018-01-01' + "T" + req.body.txtApptTime);
+    //     let frmtTime = moment.tz(tempTime, "America/Phoenix").format('h:mm a');
+    //     twilio.messages
+    //         .create({
+    //             to: req.body.txtClient1,
+    //             from: env.TWILIO_NUM,
+    //             body: req.body.txtStdRmndr+' '+req.body.txtCstmRmndr+' Your appt is '+frmtdDate+', '+frmtTime+'. Frm '+req.body.txtCustomFrom+', '+req.body.txtFromGrp+'. Call '+req.body.txtCallback+' to make changes to your appt.'
+    //         })
+    //         .then(message => console.log('Reminder Sent! SID is: '+message.sid));
+    //     res.redirect('/reminders');
+    // });
 
 module.exports = router;

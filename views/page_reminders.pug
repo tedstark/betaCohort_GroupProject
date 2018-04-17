@@ -8,37 +8,43 @@ block content
             form(id="txtForm" role='form' method='POST' action='/reminders/preview')
                 .form-group
                     label(for='txtStdRmndr') Standard Reminder:
-                    select.form-control(name="txtStdRmndr" size="0")
+                    select.form-control(name="txtStdRmndr" size="0" required)
                         option(disabled='', selected='', value='')  -- Select a Reminder Message --
-                        option(value='This is a reminder for your upcoming FSWF appt.')
-                            | This is a reminder for your upcoming FSWF appt.
-                        option(value='This is a reminder to bring your documents to your next FSWF appt.')
-                            | This is a reminder to bring your documents to your next FSWF appt.
+                        each reminderdd, i in reminderdds
+                            option(value=reminderdd.name) #{reminderdd.name}
+                        //- option(value='This is a reminder to bring your documents to your next FSWF appt.')
+                        //-     | This is a reminder to bring your documents to your next FSWF appt.
                 .form-group
                     label(for='txtCstmRmndr') Custom Message:
-                    input.form-control(name='txtCstmRmndr' type='text' placeholder='Enter Message Body...' size='35')
-                .form-group
-                    label(for='txtApptDate') Appointment Date:
-                    input.form-control(name='txtApptDate' type='date')
-                .form-group
-                    label(for='txtApptTime') Appointment Time:
-                    input.form-control(name='txtApptTime' type='time' value='09:00:00', step='900')
+                    input.form-control(name='txtCstmRmndr' type='text' placeholder='Enter Message Body...')
+                .form-row.col-sm-6
+                    .form-group
+                        label(for='txtApptDate') Appointment Date:
+                        input.form-control(name='txtApptDate' type='date' required)
+                .form-row.col-sm-6
+                    .form-group
+                        label(for='txtApptTime') Appointment Time:
+                        input.form-control(name='txtApptTime' type='time' value='09:00:00' step='900' required)
                 .form-group
                     label(for='txtCustomFrom') From:
-                    input.form-control(name='txtCustomFrom' type='text' placeholder='From...' size='35')
+                    input.form-control(name='txtCustomFrom' type='text' placeholder='From...')
                 .form-group
-                    label(for='txtFromGrp') From Group:
-                    select.form-control(name='txtFromGrp', size='0')
-                        option(disabled='', selected='', value='')  -- Select a Group --
-                        option(value="Fresh Start Women's Foundation") Fresh Start Women's Foundation
-                        option(value='FSWF Social Services') FSWF Social Services
-                        option(value='FSWF Family Law') FSWF Family Law
-                .form-group
-                    label(for='txtClient1') Client #:
-                    input.form-control(name='txtClient1' type='number' placeholder='Client Phone...' min='2111111111' max='9999999999')
-                .form-group
-                    label(for='txtCallback') FSWF Contact #:
-                    input.form-control(name='txtCallback', type='number' placeholder='FSWF Contact Phone...' min='2111111111' max='9999999999')
+                    label(for='txtFromGrp') Workgroup:
+                    select.form-control(name='txtFromGrp', size='0' required)
+                        option(disabled='', selected='', value='')  -- Select a Workgroup --
+                        each groupdd, i in groupdds
+                            option(value=groupdd.name) #{groupdd.name}
+                        //- option(value="Fresh Start Women's Foundation") Fresh Start Women's Foundation
+                        //- option(value='FSWF Social Services') FSWF Social Services
+                        //- option(value='FSWF Family Law') FSWF Family Law
+                .form-row.col-sm-6
+                    .form-group
+                        label(for='txtClient1') Client #:
+                        input.form-control(name='txtClient1' type='number' placeholder='Client Phone...' min='2111111111' max='9999999999' required)
+                .form-row.col-sm-6
+                    .form-group
+                        label(for='txtCallback') FSWF Contact #:
+                        input.form-control(name='txtCallback', type='number' placeholder='FSWF Contact Phone...' min='2111111111' max='9999999999' required)
                 br
                 input.btn.btn-info.btn-sm(type="submit", value="Preview Text")
                 a.btn.btn-default.btn-sm.clrForm(type="button") Reset Form

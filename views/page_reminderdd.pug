@@ -1,0 +1,37 @@
+extends page_layout2
+
+block content
+  if user && user.role=='admin'
+        .container
+            h1 #{title}
+            br
+            hr
+            h4 Add a Standard Reminder:
+            br
+            form(role='form' method='POST' action='/reminderdd/add')
+                .form-group
+                    //- label(for='reminderName') Username:
+                    input.form-control(class='u-full-width', name='reminderMsg', type='text', placeholder='New Standard Reminder...')
+                br
+                input.btn.btn-info.btn-sm(type="submit", value="Submit Reminder")
+            br
+            hr
+        .container
+            br
+            h4 Current Reminder List:
+            table.table
+                thead
+                    tr
+                        th(scope='col') #
+                        th(scope='col') Name
+                        th(scope='col') Active
+                        th(scope='col') Actions
+                tbody
+                    each reminderdd, i in reminderdds
+                        tr
+                            th(scope='row')= i+1
+                            td= reminderdd.name
+                            td= reminderdd.active
+                            td
+                                a.btn.btn-info.btn-sm(href="/reminderdd/edit/"+reminderdd._id) Edit
+                                button.btn.btn-danger.btn-sm.delete-reminder(href='#', data-id=reminderdd._id) Delete

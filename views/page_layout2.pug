@@ -20,24 +20,26 @@ html
                     //-     a.nav-link(href='/') Home
                     if user
                         li.nav-item
-                            a.nav-link(href='/reminders') Reminders
+                            a.nav-link(href='/reminders') Reminders |
                         li.nav-item
-                            a.nav-link(href='/messages') Messages
-                        //li.nav-item
-                        //    a.nav-link(href='/preview') Preview
+                            a.nav-link(href='/messages') Messages |
                         if user.role=='admin'
                             li.nav-item
-                                a.nav-link(href='/users/list') All Users
+                                a.nav-link(href='/users') User Admin |
+                            //- li.nav-item
+                            //-     a.nav-link(href='/users/add') Add a User
                             li.nav-item
-                                a.nav-link(href='/users/add') Add a User
+                                a.nav-link(href='/groupdd') Workgroups |
+                            li.nav-item
+                                a.nav-link(href='/reminderdd') Standard Reminders |
                         li.nav-item
                             a.nav-link(href='/login/logout') Logout
             br
             != messages('include_msgs', locals)
             if errors
               each error, i in errors
-                div.alert.alert-danger.alert-dismissible.close #{error.msg}  
-            br
+                div.alert.alert-danger.alert-dismissible.fade.show #{error.msg}
+                    button(type="button" class="close" data-dismiss="alert") &times;
         block content
         .container
             if !user
@@ -49,4 +51,4 @@ html
                 .myfooter.monkey-l
                     p Copyright ©2018 Fresh Start Women's Foundation
                 .myfooter.monkey-r
-                    p 2018/04/16.01
+                    p 2018/04/16.v12

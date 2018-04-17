@@ -104,8 +104,11 @@ app.set('view engine', 'pug');
   let usersRouter = require('./routes/routes_users');
   let appRouter = require('./routes/routes_app');
   let loginRouter = require('./routes/routes_login');
-
+  let groupddRouter = require('./routes/routes_groupdd');
+  let remddRouter = require('./routes/routes_reminderdd');
   // Route statements
+  app.use('/reminderdd', remddRouter);
+  app.use('/groupdd', groupddRouter);
   app.use('/messages', msgRouter);
   app.use('/reminders', rmndrRouter);
   app.use('/users', usersRouter);

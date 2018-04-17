@@ -8,28 +8,28 @@ block content
             form(id="txtForm" role='form' method='POST' action='/messages/preview')
                 .form-group
                     label(for='txtCustomMsg') Personalized Message:
-                    input.form-control(name='txtCustomMsg' type='text' placeholder='Enter Message Body...' size='35')
-                br
+                    input.form-control(name='txtCustomMsg' type='text' placeholder='Enter Message Body...' required)
                 .form-group
                     label(for='txtCustomFrom') From:
-                    input.form-control(name='txtCustomFrom' type='text' placeholder='From...' size='35')
-                br
+                    input.form-control(name='txtCustomFrom' type='text' placeholder='From...')
                 .form-group
-                    label(for='txtFromGrp') From Group:
-                    select.form-control(name='txtFromGrp', size='0')
-                        option(disabled='', selected='', value='')  -- Select a Group --
-                        option(value="Fresh Start Women's Foundation") Fresh Start Women's Foundation
-                        option(value='Social Services') FSWF Social Services
-                        option(value='Family Law') FSWF Family Law
-                br
-                .form-group
-                    label(for='txtClient1') Client #:
-                    input.form-control(name='txtClient1' type='number' placeholder='Client Phone #...' min='2111111111' max='9999999999')
-                br
-                .form-group
-                    label(for='txtCallback') FSWF Contact #:
-                    input.form-control(name='txtCallback', type='number' placeholder='Callback Phone...' min='2111111111' max='9999999999')
-                br
+                    label(for='txtFromGrp') Workgroup:
+                    select.form-control(name='txtFromGrp', size='0' required)
+                        option(disabled='', selected='', value='')  -- Select a Workgroup --
+                        each groupdd, i in groupdds
+                            option(value=groupdd.name) #{groupdd.name}
+                        //- option(value="Fresh Start Women's Foundation") Fresh Start Women's Foundation
+                        //- option(value='FSWF Social Services') FSWF Social Services
+                        //- option(value='FSWF Family Law') FSWF Family Law
+                .form-row.col-sm-6
+                    .form-group
+                        label(for='txtClient1') Client #:
+                        input.form-control(name='txtClient1' type='number' placeholder='Client Phone #...' min='2111111111' max='9999999999' required)
+                .form-row.col-sm-6
+                    .form-group
+                        label(for='txtCallback') FSWF Contact #:
+                        input.form-control(name='txtCallback', type='number' placeholder='Callback Phone...' min='2111111111' max='9999999999' required)
                 br
                 input.btn.btn-info.btn-sm(type="submit", value="Submit Text")
                 a.btn.btn-default.btn-sm.clrForm(type="button") Reset Form
+            br

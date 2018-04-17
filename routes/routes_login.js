@@ -9,9 +9,10 @@ let User = require('../models/user');
 // User Routes
     // DOM: Show User Login block on page_home.pug
     router.get('/disclaimer',function (req,res) {
-      res.render('page_login2', {
-          title: 'Disclaimer:'
-      });
+        req.flash('success alert-dismissible fade show', 'You are logged in!');
+        res.render('page_login2', {
+            title: 'Disclaimer:'
+        });
     });
 
     // DOM: User logout process; shows Home page with Login block upon logout
@@ -26,7 +27,7 @@ let User = require('../models/user');
       passport.authenticate('local', {
         successRedirect: '/login/disclaimer',
         failureRedirect: '/',
-        badRequestMessage: 'Please enter username and password.',
+        badRequestMessage: 'Please enter valid username and/or valid password.',
         failureFlash: true
       })
       (req,res,next);

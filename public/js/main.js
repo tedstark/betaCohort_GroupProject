@@ -7,10 +7,12 @@ function init(){
 }
 
 function enable () {
-  $('.addNum').on('click', addNumFields);
-  $('.removeNum').on('click', remNumFields);
+  // $('.addNum').on('click', addNumFields);
+  // $('.removeNum').on('click', remNumFields);
   $('.clrForm').on('click', clrForm);
   deleteUser();
+  deleteGroup();
+  deleteReminder();
 }
 
 // Reset Form Button
@@ -38,6 +40,43 @@ function deleteUser () {
       });
 }
 
+function deleteGroup () {
+    $('.delete-group').on('click', function (groupdd) {
+          $target = $(groupdd.target);
+          var id = $target.attr('data-id');
+          $.ajax({
+              type:'DELETE',
+              url: '/groupdd/delete/'+id,
+              success: function (response) {
+                location.reload(true);
+                req.flash('success', 'Group deleted!');
+              },
+              error: function (err) {
+                  console.log(err);
+              }
+          });
+      });
+}
+
+function deleteReminder () {
+    $('.delete-reminder').on('click', function (reminderdd) {
+          $target = $(reminderdd.target);
+          var id = $target.attr('data-id');
+          $.ajax({
+              type:'DELETE',
+              url: '/reminderdd/delete/'+id,
+              success: function (response) {
+                location.reload(true);
+                req.flash('success', 'Reminder deleted!');
+              },
+              error: function (err) {
+                  console.log(err);
+              }
+          });
+      });
+}
+
+// -------------UNUSED FUNCTIONS--------------------- //
 // Counts number of character in text message preview
 function textareaCount () {
     let text_max = 122;
@@ -48,8 +87,6 @@ function textareaCount () {
         $('.previewMsg_Count').html(text_remaining + ' characters remaining');
     });
 }
-
-
 
 // Adds additional 'To #' Field on Messages page
 function addNumFields () {

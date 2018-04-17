@@ -20,7 +20,9 @@ a {
 .alert-error .alert-link {
     color: #491217;
 }
-
+.form-row {
+  display: inline-block;
+}
 .monkey-l {
     display: inline-block;
     float: left;
