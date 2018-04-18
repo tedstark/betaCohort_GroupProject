@@ -19,10 +19,11 @@ require('console-stamp')(console, 'HH:MM:ss');
 let app = express();
 let env = process.env;
 let db = mongoose.connection;
-let txtFullMsg = '';
 let txtToPhone = '';
+let txtFullMsg = '';
+let twilioSID = '';
+let twilioStatus= '';
 let returnPage = '';
-let txtSID = '';
 
 //Set Public folder path
 app.use(express.static(path.join(__dirname, 'public')));
@@ -106,7 +107,10 @@ app.set('view engine', 'pug');
   let loginRouter = require('./routes/routes_login');
   let groupddRouter = require('./routes/routes_groupdd');
   let remddRouter = require('./routes/routes_reminderdd');
+  // let histRouter = require('./routes/routes_history');
+
   // Route statements
+  // app.use('/history', histRouter);
   app.use('/reminderdd', remddRouter);
   app.use('/groupdd', groupddRouter);
   app.use('/messages', msgRouter);

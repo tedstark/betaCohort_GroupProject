@@ -1,0 +1,39 @@
+extends page_layout2
+
+block content
+    if user
+        .container
+            h1 #{title}
+            br
+            hr
+            h5 This search page will display texts/messages sent from the application within the last 7 days. 
+            br
+            h5 To search for a specific client's messages, enter their phone number and click the Search button.  To see all messages, leave the phone number field blank and click the Search button.
+            br
+            form(id="txtForm" role='form' method='POST' action='/twilio/history')
+                .form-group
+                    label(for='clientPhone') Client #:
+                    input.form-control(name='clientPhone' type='text' placeholder='Client Phone...' min='2111111111' max='9999999999')
+                br
+                input.btn.btn-success.btn-sm(type='submit' value='Search')
+        br
+        .container
+            br
+            h4 Messages Sent Over the Last Week #{title2}
+            table.table
+                thead
+                    tr
+                        th(scope='col') #
+                        th(scope='col') Date/Time
+                        th(scope='col') Sent to
+                        th(scope='col') Message Body
+                        th(scope='col') Status
+                tbody
+                    each response, i in responses
+                        tr
+                            th(scope='row')= i+1
+                            td= moment(response.dateSent).format("MM/DD/YYYY, hh:mm a")
+                            td= response.to
+                            td= response.body
+                            td= response.status
+                

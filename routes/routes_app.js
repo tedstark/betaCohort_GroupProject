@@ -4,14 +4,6 @@ const bcrypt = require('bcryptjs');
 const passport = require('passport');
 
 //App Routes
-
-    // DOM: Show 'Preview' Page
-    // router.get('/preview', function(req,res){
-    //     res.render('page_preview', {
-    //         title: 'Preview Page'
-    //     });
-    // });
-
     // DOM: Show '/' Page
     router.get('/', function(req,res){
       res.render('page_login', {

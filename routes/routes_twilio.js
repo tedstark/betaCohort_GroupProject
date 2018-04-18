@@ -3,6 +3,7 @@ const router = express.Router();
 const bodyParser = require('body-parser');
 const dateformat = require('dateformat');
 const moment = require('moment-timezone');
+const delay = require('delay');
 
 require('dotenv').load();
 
@@ -24,18 +25,65 @@ router.use(bodyParser.urlencoded({ extended: false }));
                 from: env.TWILIO_NUM,
                 body: req.body.previewMessage
             })
-            .then(message => console.log('Text Sent: '+message.sid));
+            .then(message => console.log(message));
         req.flash('success alert-dismissible fade show', 'Your Reminder/Message was sent!');
         res.redirect('/'+returnPage);
     });
 
     // POST: Auto response from application for received text messages
-    router.post('/sms', (req, res) => {
+    router.post('/sms', function (req, res) {
         const twiml = new MessagingResponse();
         const message = twiml.message();
         message.body('This number does not accept messages or calls. Please use the callback # in the text you received from FSWF. Thank you!');
         res.writeHead(200, {'Content-Type': 'text/xml'});
         res.end(twiml.toString());
+    });
+
+    // DOM: Show History/Log Page for Search results
+    router.post('/history', function(req,res){
+        let messages = [];
+        let frmtdDate = moment(Date.now() - 7 * 24 * 3600 * 1000).format('YYYY-MM-DD');
+        const filterOpts = {
+            To: '4802720635',
+            dateSentAfter: frmtdDate
+        };
+        twilio.messages.each(filterOpts, function(message) {
+            messages.push(message);
+        });
+        delay(1000)
+            .then(() => {
+                console.log(messages);
+                console.log(req.user); 
+                res.render('page_history', {
+                  responses:messages,
+                  title: 'Message History/Log',
+                  title2: 'for +1'+req.body.clientPhone,
+                  frmtdDate:frmtdDate,
+                  moment:moment
+                });
+            });
+    });
+
+    // DOM: Show History/Log Page
+    router.get('/history', function(req,res){
+        let messages = [];
+        let frmtdDate = moment(Date.now() - 7 * 24 * 3600 * 1000).format('YYYY-MM-DD');
+        const filterOpts = {
+            To: '',
+            dateSentAfter: frmtdDate
+        };
+        twilio.messages.each(filterOpts, function(message) {
+            messages.push(message);
+        });
+        delay(1000)
+            .then(() => {
+                res.render('page_history', {
+                  responses:messages,
+                  title: 'Message History/Log',
+                  frmtdDate:frmtdDate,
+                  moment:moment
+                });
+            });
     });
 
 module.exports = router;
