@@ -1,24 +1,32 @@
 this is a test of using GitHub in a team
 
+const TEST_TO = '+14802720635';
+const TEST_FROM = '+14803729908';
 const accountSid = 'ACbba27afc23b7049bdd547dc86724bc78';
 const authToken = '8e0a742139f4dd93463afcc1d9ba6098';
 
+    p
+    h1 Sent Text Logs
+    p
+    if logArr
+        for res in logArr
+            .row
+                .col-md-1.card.box
+                    .cp!= res.dateSent
+                .col-md-1.card.box
+                    .cp!= res.to
+                .col-md-1.card.box
+                    .cp!= res.status
+                .col-md-9.card.box
+                    .cp!= res.body
+
+   tfoot
+            tr
+                th Date Sent
+                th Client#
+                th Status
+                th Text
 
 
-    form(method='POST', action='/send')
-        h3 Please confirm text message.
-        p
-        h4= textMsg
-        p
-        button#btnSend.btn.btn-success Send Text
 
-    form(method='GET', action='/cancelpreview')
-        p
-        p
-        button#btnBack.btn.btn-default Cancel
-
-    form(method='GET', action='/home')
-        p
-        p
-        button#btnHome.btn.btn-default home page
 

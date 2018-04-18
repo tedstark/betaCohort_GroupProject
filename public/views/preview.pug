@@ -5,7 +5,9 @@ block content
     form(method='POST', action='/send')
         h3 Please confirm text message.
         p
-        h4= textMsg
+        p
+        textarea(rows="5" name="textMsg")=textMsg
+
         p
         button#btnSend.btn.btn-success Send Text
 

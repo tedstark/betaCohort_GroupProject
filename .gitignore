@@ -58,7 +58,7 @@ typings/
 .env
 
 # Joan notes
-Joan.txt
+Joan
 
 # next.js build output
 .next

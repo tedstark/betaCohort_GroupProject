@@ -1,0 +1,24 @@
+extends layout
+
+block content
+    p
+    form(method='GET', action='/home')
+        button#btnHome.btn.btn-default back
+    p
+    h1 Sent Text Logs
+    p
+    table#histlog.table.table-striped.table-bordered(style='width:100%')
+        thead
+            tr
+                th Date Sent
+                th Client#
+                th Status
+                th Text
+        tbody
+            if logArr
+                for res in logArr
+                    tr
+                        td!= res.dateSent
+                        td!= res.to
+                        td!= res.status
+                        td!= res.body

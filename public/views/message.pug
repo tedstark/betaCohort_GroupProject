@@ -5,6 +5,16 @@ block content
     h3 Custom Text Messages
     form(method='POST', action='/submitcus')
        p
+       if errors
+           ul
+               for error in errors
+                   li!= error.msg
+       p
+       if message
+           Your Text Message Was Sent:
+           li SID Code:
+           li!= message.sid
+       p
        p
        .row
            .col-md-1

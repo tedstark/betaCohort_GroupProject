@@ -1,20 +1,39 @@
 const express = require('express');
+const http = require('http');
 const bodyParser = require('body-parser');
-const expresValidator = require('express-validator');
+const validator = require('express-validator');
 const app = express();
 const path = require('path');
 const dateformat = require('dateformat');
 const moment = require('moment-timezone');
 const dialog = require('dialog');
-// copy twilio constants and TO/FROM numbers here - env file not working
+const delay = require('delay');
 
+// Bring in models
+let SentText = require('./models/senttext');
+
+// array to hold sent messages
+// let logArr = {
+//     logDT: "",
+//     logTo: "",
+//     logText: "",
+//     logStatus: ""
+// };
+
+let logArr = [];
+
+// copy twilio constants and TO/FROM numbers here - env file not working
+const TEST_TO = '4802720635';
+const TEST_FROM = '4803729908';
+const accountSid = 'ACbba27afc23b7049bdd547dc86724bc78';
+const authToken = '8e0a742139f4dd93463afcc1d9ba6098';
 const client = require('twilio')(accountSid, authToken);
 
 // Global Variables
 app.use(function(req, res, next){
    res.locals.errors = "";
-   res.locals.textMsg = "";
    res.locals.returnpage = "";
+   res.locals.textMsg = "";
    res.locals.customMsg = "";
    res.locals.customFrom = "";
    res.locals.fromGroup = "";
@@ -23,6 +42,7 @@ app.use(function(req, res, next){
    res.locals.standardMsg = "";
    res.locals.appDate = "";
    res.locals.appTime = "";
+   res.locals.savesid = "";
    next();
 });
 
@@ -33,6 +53,12 @@ app.use(express.static('public/images'));
 app.get('/css/style.css', function(req, res){
     res.sendFile(__dirname + '/css/style.css');
 });
+
+// main.js path
+app.get('/js/main.js', function(req, res){
+    res.sendFile(__dirname + '/js/main.js');
+});
+
 
 // preview.pug path
 app.get('/views/preview.pug', function(req, res){
@@ -50,12 +76,12 @@ app.use(bodyParser.urlencoded({extended: false}));
 // Set Static Path
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Express Validator Middleware
-app.use(expresValidator({
+// Express Validator Middleware - must be after bodyparser
+app.use(validator({
     errorFormatter: function (param, msg, value) {
-        var namespace = param.split('.');
-        var root = namespace.shift();
-        var formParam = root;
+        let namespace = param.split('.');
+        let root = namespace.shift();
+        let formParam = root;
 
         while (namespace.length) {
             formParm += '[' + namespace.shift() + ']';
@@ -86,6 +112,50 @@ app.get('/message', function(req, res){
     res.render('message');
 });
 
+// text history button on index page
+app.get('/textlogs', function(req, res){
+    console.log("get /textlogs");
+
+    // display all past messages - NO FILTERING
+    //client.messages.each((message) => console.log(message.body));
+
+    // Twilio API to retrieve messages with the filterOptions without a function
+    //client.messages.each(filterOpts, (message) => console.log("sent" + message.DateSent + "sid: " + message.sid + " text: " + message.body));
+
+    // create a date 7 days prior to today to use for Twilio filtering date
+    let filterDate = moment(Date.now() - 7 * 24 * 3600 * 1000).format('YYYY-MM-DD');
+    console.log("filterDate = ", filterDate);
+
+    // Filtering Options to get past messages by specific criteria
+    const filterOpts = {
+        To: 'TEST_TO',
+        dateSentAfter: filterDate
+    };
+
+    // Twilio API to retrieve sent messages using filtering options
+    client.messages.each(filterOpts, function(res) {
+
+        let tempDate = dateformat(res.dateSent, 'shortDate');
+
+        // format date sent field to format time from 24 military, i.e. 17:30 to 9:30pm
+        let tempDteTime = moment.tz(res.dateSent, "America/Phoenix").format('h:ma');
+        let textDateTime = tempDate + " " + tempDteTime;
+
+        // show message fields
+       // console.log("date sent: ", textDateTime, " sent to: ", res.to, " text: ", res.body, " status: ", res.status);
+
+        logArr.push(res);
+    });
+
+    // delay page load until Twilio call is finished returning all records
+    delay(1000)
+        .then(() => {
+            console.log(logArr);
+            res.render('textlogs', { logArr: logArr });
+        });
+
+});
+
 // submit text button on message page
 app.post('/submitcus', function(req, res){
     console.log("post /submitcus");
@@ -94,16 +164,14 @@ app.post('/submitcus', function(req, res){
     req.checkBody('txtCustomMsg', 'Custom message is required').notEmpty();
     req.checkBody('txtCallback', 'Callback number is required').notEmpty();
     req.checkBody('txtClient', 'Client number is required').notEmpty();
-    //req.checkBody('txtClient', 'Client number is required').notNumeric();
-   // req.checkBody('txtClient', 'Client number is required').isMobilePhone({options:['en-US']});
+    req.checkBody('txtClient','Enter a valid cell phone number.').isMobilePhone('en-US');
 
     // check for errors in data entry
-    var cerrors = req.validationErrors();
+    let errors = req.validationErrors();
 
-    if (cerrors) {
-        errmsgs = "Please provide all required fields";
-        // display error warning popup window
-        dialog.err(errmsgs, "Errors:" );
+    if (errors) {
+            res.render('message', { errors: errors });
+            return;
 
     } else {
         // save field values from page
@@ -132,17 +200,14 @@ app.post('/submitrem', function(req, res){
     req.checkBody('txtRStandardMsg', 'Standard message is required').notEmpty();
     req.checkBody('txtRCallback', 'Callback number is required').notEmpty();
     req.checkBody('txtRClient', 'Client number is required').notEmpty();
-   // req.checkBody('txtRClient', 'Client number is required').notNumeric();
-   // req.checkBody('txtRClient', 'Client number is required').isMobilePhone({options:['en-US']});
-
+    req.checkBody('txtRClient','Enter a valid cell phone number.').isMobilePhone('en-US');
 
     // check for errors in data entry
-    var rerrors = req.validationErrors();
+    let errors = req.validationErrors();
 
-    if (rerrors) {
-        errmsgs = 'Please provide all required fields';
-        // display error warning popup window
-        dialog.err(errmsgs, 'Errors:' );
+    if (errors) {
+        res.render('reminder', { errors: errors });
+        return;
 
     } else {
 
@@ -155,11 +220,11 @@ app.post('/submitrem', function(req, res){
         clientcell = req.body.txtRClient;
 
         // Format date from yyyy-mm-dd to m-d-yy
-        var tempDate = req.body.txtRAppDate + " MST";
+        let tempDate = req.body.txtRAppDate + " MST";
         appDate = dateformat(tempDate, 'shortDate');
 
         // Format time from 24 military, i.e. 17:30 to 9:30pm
-        var tempDteTime = ('2018-01-01' + "T" + req.body.txtRAppTime);
+        let tempDteTime = ('2018-01-01' + "T" + req.body.txtRAppTime);
         appTime = moment.tz(tempDteTime, "America/Phoenix").format('h:ma');
 
         // combine fields to make text message
@@ -180,28 +245,52 @@ app.post('/send', function(req, res, next) {
 
     // would be changed as follows:
     //    to: clientcell
-    //    from: env variable for twillio approved number
     // will display a popup window that text was sent - display sid
     // **** SOMETIMES SENT DIALOG SLOW TO DISPLAY - TWILLIO TEST SERVER SLOWER??
-    client.messages.create({
-        to: TEST_TO,
+    client.messages.create(
+    {   to: TEST_TO,
         from: TEST_FROM,
         body: textMsg
-    })
-        .then((message) => dialog.info('Text has been sent. ' + '/n' + 'SID Code: ' + message.sid, 'Text Confirmation'));
+    },
+        function(err, message) {
 
-    // was hoping this sent back a call log list - not sure what Twillio uses this for
-    // something to investigate further??
-    // got some errors from this during testing - might be used to confirm delivery?
-    client.messaging.services.list()
-        .then(function(response) {
-            console.log("client.messaging response = ", response);
-        }).catch(function(error) {
-        console.log("client.messageing error = ", error);
-    });
+            if (err) {
 
-    // return to the page that called the Send Text
-    res.render(returnpage);
+            } else {
+                savesid = message.sid;
+                console.log("message = ", message);
+                res.render(returnpage, { message: message });
+                return;
+               // console.log("savesid = " + message.sid);
+               // dialog.info('Text has been sent.' + '\n' + 'SID Code: ' + savesid, 'Text Confirmation');
+
+                //
+                // // get current date and time for database
+                // let d = new Date();
+                // let date = (d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate());
+                // let time = (d.getHours() + ':' + d.getMinutes() + ':' + d.getSeconds());
+                // let dateTime = date + ' ' + time;
+                // console.log("dateTime = ", dateTime);
+                //
+                // // save sent text to DB
+                // let senttext = new SentText();
+                //     senttext.text = textMsg,
+                //     senttext.client = clientcell,
+                //     senttext.sentdate = dateTime,
+                //     senttext.sid = savesid;
+                // console.log('senttext object = ', senttext);
+                //
+                // senttext.save(function (err) {
+                //     if (err) {
+                //         console.log('error on .save function err= ', err);
+                //     } else {
+                //         console.log('sent text saved to DB');
+                //     }
+
+            }
+        });
+            // return to the page that called the Send Text
+           // res.render(returnpage);
 });
 
 // Go back to home page
@@ -211,33 +300,35 @@ app.get('/home', function(req, res, next) {
 
 // Cancel button on Preview Page - restore saved values back to message page
 app.get('/cancelpreview', function(req, res, next) {
+    res.render(returnpage);
 
-    if (returnpage == "messages") {
-        // **** NEED TO GET DROP DOWN fromGroup TO RESET TO SAVED VALUE
-        res.render(returnpage, {
-            customMsg: customMsg,
-            callback: callback,
-            fromGroup: fromGroup,
-            customFrom: customFrom,
-            clientcell: clientcell
-        });
+    // if (returnpage == "messages") {
+    //     // **** NEED TO GET DROP DOWN fromGroup TO RESET TO SAVED VALUE
+    //     res.render(returnpage, {
+    //         customMsg: customMsg,
+    //         callback: callback,
+    //         fromGroup: fromGroup,
+    //         customFrom: customFrom,
+    //         clientcell: clientcell
+    //     });
+    //
+    // } else {
+    //     // display reminder page
+    //     // **** NEED TO GET DROP DOWNS TO RESET TO SAVED VALUE
+    //     // **** NEED TO GET DATE & TIME TO RESET TO SAVED VALUE
+    //     res.render(returnpage, {
+    //         standardMsg: standardMsg,
+    //         customMsg: customMsg,
+    //         callback: callback,
+    //         fromGroup: fromGroup,
+    //         customFrom: customFrom,
+    //         clientcell: clientcell,
+    //         appTime: appTime,
+    //         appDate: appDate
+    //     });
+    //}
 
-    } else {
-        // display reminder page
-        // **** NEED TO GET DROP DOWNS TO RESET TO SAVED VALUE
-        // **** NEED TO GET DATE & TIME TO RESET TO SAVED VALUE
-        res.render(returnpage, {
-            standardMsg: standardMsg,
-            customMsg: customMsg,
-            callback: callback,
-            fromGroup: fromGroup,
-            customFrom: customFrom,
-            clientcell: clientcell,
-            appTime: appTime,
-            appDate: appDate
-        });
-    }
-    });
+});
 
 app.listen(3000, function() {
     console.log('app.js-server started on port 3000');

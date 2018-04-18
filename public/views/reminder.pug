@@ -4,6 +4,11 @@ block content
     h3 Appointment Reminder Text Messages
 
     form(method='POST', action='/submitrem')
+        p
+        if errors
+            ul
+                for error in errors
+                    li!= error.msg
         .row
             .col-md-1
             .col-md-10.card.box
