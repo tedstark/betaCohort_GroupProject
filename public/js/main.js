@@ -7,13 +7,14 @@ function init(){
 }
 
 function enable () {
-  // $('.addNum').on('click', addNumFields);
-  // $('.removeNum').on('click', remNumFields);
   $('.clrForm').on('click', clrForm);
   deleteUser();
   deleteGroup();
   deleteReminder();
   $('#histlog').DataTable();
+  // dateTimePicker();
+  // $('.addNum').on('click', addNumFields);
+  // $('.removeNum').on('click', remNumFields);
 }
 
 // Reset Form Button
@@ -76,7 +77,12 @@ function deleteReminder () {
           });
       });
 }
-
+function dateTimePicker () {
+  $('#inputDate').datetimepicker({
+      sideBySide: true,
+      format: 'MM-DD-YYYY hh:mm a',
+  });
+}
 // -------------UNUSED FUNCTIONS--------------------- //
 // Counts number of character in text message preview
 function textareaCount () {

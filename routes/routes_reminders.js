@@ -34,6 +34,7 @@ router.use(bodyParser.urlencoded({ extended: false }));
                         res.render('page_reminders', {
                             groupdds:groupdds,
                             reminderdds:reminderdds,
+                            moment:moment,
                             title: 'Send a Reminder'
                         });
                       }
@@ -65,11 +66,11 @@ router.use(bodyParser.urlencoded({ extended: false }));
         //         errors:errors
         //     });
         // } else {
-            let frmtdDate = dateformat((req.body.txtApptDate + ' MST'), 'shortDate');
-            let tempTime = ('2018-01-01' + "T" + req.body.txtApptTime);
-            let frmtdTime = moment.tz(tempTime, "America/Phoenix").format('h:mm a');
+            // let frmtdDate = dateformat((req.body.txtApptDate + ' MST'), 'shortDate');
+            // let tempTime = ('2018-01-01' + "T" + req.body.txtApptTime);
+            // let frmtdTime = moment.tz(tempTime, "America/Phoenix").format('h:mm a');
             txtToPhone = req.body.txtClient1;
-            txtFullMsg = req.body.txtStdRmndr+' '+req.body.txtCstmRmndr+' Your appt is '+frmtdDate+', '+frmtdTime+'. From '+req.body.txtCustomFrom+' '+req.body.txtFromGrp+'. Call '+req.body.txtCallback+' to make changes to your appt.';
+            txtFullMsg = req.body.txtStdRmndr+' '+req.body.txtCstmRmndr+' Your appt is at '+req.body.txtApptDate+'. From '+req.body.txtCustomFrom+' '+req.body.txtFromGrp+'. Call '+req.body.txtCallback+' to make changes to your appt.';
             returnPage = 'reminders';
             res.redirect('/reminders/preview');
           // }

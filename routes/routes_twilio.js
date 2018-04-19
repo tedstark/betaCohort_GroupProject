@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bodyParser = require('body-parser');
 const dateformat = require('dateformat');
+// const moment = require('moment');
 const moment = require('moment-timezone');
 const delay = require('delay');
 
@@ -42,7 +43,9 @@ router.use(bodyParser.urlencoded({ extended: false }));
     // DOM: Show History/Log Page
     router.get('/history', function(req,res){
         let messages = [];
-        let frmtdDate = moment(Date.now() - 7 * 24 * 3600 * 1000).format('YYYY-MM-DD');
+        // let frmtdDate = moment(Date.now() - 7 * 24 * 3600 * 1000).format('YYYY-MM-DD');
+        let frmtdDate = moment(Date.now()).add(-2, 'week').format('YYYY-MM-DD');
+        console.log(frmtdDate);
         const filterOpts = {
             To: '',
             dateSentAfter: frmtdDate
@@ -52,10 +55,11 @@ router.use(bodyParser.urlencoded({ extended: false }));
         });
         delay(1000)
             .then(() => {
+                console.log(messages);
                 res.render('page_history', {
                   responses:messages,
                   title: 'Message History/Log',
-                  frmtdDate:frmtdDate,
+                  title2: 'Messages Sent Over the Last Week',
                   moment:moment
                 });
             });

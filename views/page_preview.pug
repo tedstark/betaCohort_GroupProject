@@ -11,10 +11,10 @@ block content
             form(id="txtForm" role='form' method='POST' action='/twilio/send')
                 .form-group
                     label(for='previewPhone') Client #:
-                    input.form-control(name='previewPhone' type='text' placeholder='Client Phone...' min='2111111111' max='9999999999' value=txtToPhone)
+                    input.form-control(name='previewPhone' type='number' placeholder='' min='2002000000' max='9999999999' value=txtToPhone required)
                 .form-group
-                    label(for='previewMessage') Custom Message:
-                    textarea.previewMsg.form-control(name='previewMessage')= txtFullMsg
+                    label(for='previewMessage') Text Message to be Sent:
+                    textarea.previewMsg.form-control(name='previewMessage' required)= txtFullMsg
                     .previewMsg_Count
                 br
                 input.btn.btn-success.btn-sm(type='submit' value='Send Text')
