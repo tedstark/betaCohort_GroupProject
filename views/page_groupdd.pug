@@ -11,7 +11,7 @@ block content
             form(role='form' method='POST' action='/groupdd/add')
                 .form-group
                     //- label(for='groupName') Group Name:
-                    input.form-control(class='u-full-width', name='groupName', type='text', placeholder='New Group Name...')
+                    input.form-control(class='u-full-width', name='groupName', type='text', placeholder='' required)
                 br
                 input.btn.btn-info.btn-sm(type="submit", value="Submit Group")
             br
@@ -22,14 +22,12 @@ block content
             table.table
                 thead
                     tr
-                        th(scope='col') #
                         th(scope='col') Name
                         th(scope='col') Active
                         th(scope='col') Actions
                 tbody
                     each groupdd, i in groupdds
                         tr
-                            th(scope='row')= i+1
                             td= groupdd.name
                             td= groupdd.active
                             td

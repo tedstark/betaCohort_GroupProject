@@ -11,7 +11,7 @@ block content
             form(role='form' method='POST' action='/reminderdd/add')
                 .form-group
                     //- label(for='reminderName') Username:
-                    input.form-control(class='u-full-width', name='reminderMsg', type='text', placeholder='New Standard Reminder...')
+                    input.form-control(class='u-full-width', name='reminderMsg', type='text', placeholder='' required)
                 br
                 input.btn.btn-info.btn-sm(type="submit", value="Submit Reminder")
             br
@@ -22,14 +22,12 @@ block content
             table.table
                 thead
                     tr
-                        th(scope='col') #
                         th(scope='col') Name
                         th(scope='col') Active
                         th(scope='col') Actions
                 tbody
                     each reminderdd, i in reminderdds
                         tr
-                            th(scope='row')= i+1
                             td= reminderdd.name
                             td= reminderdd.active
                             td

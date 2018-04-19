@@ -51,7 +51,10 @@ let ReminderDD = require('../models/reminderdd');
   //DOM: Show 'Edit a Reminder' Page
   router.get('/edit/:id', function(req,res){
     ReminderDD.findById(req.params.id, function(err, reminderddFrmDB){
-      res.render('page_reminderddedit', {reminderddInForm:reminderddFrmDB});
+      res.render('page_reminderddedit', {
+        reminderddInForm:reminderddFrmDB,
+        title: 'Edit a Reminder'
+      });
     });
   });
 

@@ -6,31 +6,26 @@ block content
             h1 #{title}
             br
             form(id="txtForm" role='form' method='POST' action='/messages/preview')
-                .form-group.row
-                    label.col-sm-3.col-form-label(for='txtCustomMsg') Personalized Message:
-                    .col-sm-9
-                        textarea.form-control(name='txtCustomMsg' placeholder='' required)
-                .form-group.row
-                    label.col-sm-3.col-form-label(for='txtCustomFrom') From:
-                    .col-sm-9
-                        input.form-control(name='txtCustomFrom' type='text' placeholder='')
-                .form-group.row
-                    label.col-sm-3.col-form-label(for='txtFromGrp') Workgroup:
-                    .col-sm-9
-                        select.form-control(name='txtFromGrp', size='0' required)
-                            option(disabled='', selected='', value='')  -- Select a Workgroup --
-                            each groupdd, i in groupdds
-                                option(value=groupdd.name) #{groupdd.name}
+                .form-group
+                    label(for='txtCustomMsg') Personalized Message:
+                    textarea.form-control(name='txtCustomMsg' placeholder='' required)
+                .form-group
+                    label(for='txtCustomFrom') From:
+                    input.form-control(name='txtCustomFrom' type='text' placeholder='')
+                .form-group
+                    label(for='txtFromGrp') Workgroup:
+                    select.form-control(name='txtFromGrp', size='0' required)
+                        option(disabled='', selected='', value='')  -- Select a Workgroup --
+                        each groupdd, i in groupdds
+                            option(value=groupdd.name) #{groupdd.name}
                 .form-row.col-sm-6
-                    .form-group.row
-                        label.col-sm-6.col-form-label(for='txtClient1') Client Phone Number:
-                        .col-sm-6.col-form-label
-                            input.form-control(name='txtClient1' type='number' placeholder='' min='2002000000' max='9999999999' required)
+                    .form-group
+                        label(for='txtClient1') Client Phone Number:
+                        input.form-control(name='txtClient1' type='number' placeholder='' min='2002000000' max='9999999999' required)
                 .form-row.col-sm-6
-                    .form-group.row
-                        label.col-sm-6.col-form-label(for='txtCallback') Employee Phone Number:
-                        .col-sm-6.col-form-label
-                            input.form-control(name='txtCallback', type='number' placeholder='' min='2002000000' max='9999999999' required)
+                    .form-group
+                        label(for='txtCallback') Employee Phone Number:
+                        input.form-control(name='txtCallback', type='number' placeholder='' min='2002000000' max='9999999999' required)
                 br
                 input.btn.btn-info.btn-sm(type="submit", value="Submit Text")
                 a.btn.btn-default.btn-sm.clrForm(type="button") Reset Form

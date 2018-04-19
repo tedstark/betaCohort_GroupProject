@@ -1,0 +1,15 @@
+extends page_layout2
+
+block content
+  if user && user.role=='admin'
+        .container
+            h1 #{title}
+            br
+            form(role='form' method='POST' action='/reminderdd/edit/'+reminderddInForm._id)
+                .form-group
+                    label(for='reminderName') Reminder Message:
+                    input.form-control(class='u-full-width', name='groupName', type='text', placeholder='' value=reminderddInForm.name required)
+                br
+                button.btn.btn-info.btn-sm(type='submit') Submit Changes
+                a.button.btn.btn-default.btn-sm(type='button' href='/reminderdd') Cancel
+            br

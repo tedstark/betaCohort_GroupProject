@@ -51,7 +51,10 @@ let GroupDD = require('../models/groupdd');
   //DOM: Show 'Edit a Group' Page
   router.get('/edit/:id', function(req,res){
     GroupDD.findById(req.params.id, function(err, groupddFrmDB){
-      res.render('page_groupddedit', {groupddInForm:groupddFrmDB});
+      res.render('page_groupddedit', {
+        groupddInForm:groupddFrmDB,
+        title: 'Edit a Group'
+      });
     });
   });
 

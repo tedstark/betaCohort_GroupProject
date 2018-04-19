@@ -86,7 +86,10 @@ let User = require('../models/user');
     //DOM: Show 'Edit a User' Page
     router.get('/edit/:id', function(req,res){
       User.findById(req.params.id, function(err, userFrmDB){
-        res.render('page_useredit', {userInForm:userFrmDB});
+        res.render('page_useredit', {
+            userInForm:userFrmDB,
+            title: 'Edit a User'
+        });
       });
     });
 

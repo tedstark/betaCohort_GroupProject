@@ -12,20 +12,20 @@ block content
                 .form-row.col-sm-6
                     .form-group
                         label(for='username') Username:
-                        input.form-control(class='u-full-width', name='username', type='text', placeholder='Username...')
+                        input.form-control(class='u-full-width', name='username', type='text', placeholder='' required)
                     .form-group
                         label(for='role') Role:
-                        select.form-control(name='role', size='0')
-                            option(disabled='', selected='', value='')  -- select an option -- 
+                        select.form-control(name='role', size='0' required)
+                            option(disabled='', selected='', value='')  -- Select a Role -- 
                             option(value='admin') admin
                             option(value='staff') staff
                 .form-row.col-sm-6
                     .form-group
                         label(for='password') Password:
-                        input.form-control(name='password', type='password', placeholder='Enter password...')
+                        input.form-control(name='password', type='password', placeholder='' required)
                     .form-group
                         label(for='password2') Confirm Password:
-                        input.form-control(name='password2' type='password' placeholder='Confirm password...')
+                        input.form-control(name='password2' type='password' placeholder='' required)
                 br
                 input.btn.btn-info.btn-sm(type="submit", value="Submit User")
             br
@@ -36,7 +36,6 @@ block content
             table.table
                 thead
                     tr
-                        th(scope='col') #
                         th(scope='col') Username
                         th(scope='col') Role
                         th(scope='col') Active                        
@@ -44,7 +43,6 @@ block content
                 tbody
                     each user, i in users
                         tr
-                            th(scope='row')= i+1
                             td= user.username
                             td= user.role
                             td= user.active
