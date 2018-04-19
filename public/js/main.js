@@ -13,6 +13,7 @@ function enable () {
   deleteUser();
   deleteGroup();
   deleteReminder();
+  $('#histlog').DataTable();
 }
 
 // Reset Form Button

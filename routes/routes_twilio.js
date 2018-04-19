@@ -39,31 +39,6 @@ router.use(bodyParser.urlencoded({ extended: false }));
         res.end(twiml.toString());
     });
 
-    // DOM: Show History/Log Page for Search results
-    router.post('/history', function(req,res){
-        let messages = [];
-        let frmtdDate = moment(Date.now() - 7 * 24 * 3600 * 1000).format('YYYY-MM-DD');
-        const filterOpts = {
-            To: '4802720635',
-            dateSentAfter: frmtdDate
-        };
-        twilio.messages.each(filterOpts, function(message) {
-            messages.push(message);
-        });
-        delay(1000)
-            .then(() => {
-                console.log(messages);
-                console.log(req.user); 
-                res.render('page_history', {
-                  responses:messages,
-                  title: 'Message History/Log',
-                  title2: 'for +1'+req.body.clientPhone,
-                  frmtdDate:frmtdDate,
-                  moment:moment
-                });
-            });
-    });
-
     // DOM: Show History/Log Page
     router.get('/history', function(req,res){
         let messages = [];
@@ -115,4 +90,28 @@ module.exports = router;
     //         .then(message => console.log(message.sid));
     //     console.log('Message Sent!');
     //     res.redirect('/messages');
+    // });
+    // // DOM: Show History/Log Page for Search results
+    // router.post('/history', function(req,res){
+    //     let messages = [];
+    //     let frmtdDate = moment(Date.now() - 7 * 24 * 3600 * 1000).format('YYYY-MM-DD');
+    //     const filterOpts = {
+    //         To: '4802720635',
+    //         dateSentAfter: frmtdDate
+    //     };
+    //     twilio.messages.each(filterOpts, function(message) {
+    //         messages.push(message);
+    //     });
+    //     delay(1000)
+    //         .then(() => {
+    //             console.log(messages);
+    //             console.log(req.user);
+    //             res.render('page_history', {
+    //               responses:messages,
+    //               title: 'Message History/Log',
+    //               title2: 'for +1'+req.body.clientPhone,
+    //               frmtdDate:frmtdDate,
+    //               moment:moment
+    //             });
+    //         });
     // });
