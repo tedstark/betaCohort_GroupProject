@@ -23,18 +23,18 @@ html
                     //-     a.nav-link(href='/') Home
                     if user
                         li.nav-item
-                            a.nav-link(href='/reminders') Reminders |
+                            a.nav-link(href='/reminders') Reminders
                         li.nav-item
-                            a.nav-link(href='/messages') Messages |
+                            a.nav-link(href='/messages') Messages
                         li.nav-item
-                            a.nav-link(href='/twilio/history') History |
+                            a.nav-link(href='/twilio/history') Text Msg History
                         if user.role=='admin'
                             li.nav-item
-                                a.nav-link(href='/users') User Admin |
+                                a.nav-link(href='/users') User Admin
                             li.nav-item
-                                a.nav-link(href='/groupdd') Workgroups |
+                                a.nav-link(href='/groupdd') Workgroup Admin
                             li.nav-item
-                                a.nav-link(href='/reminderdd') Standard Reminders |
+                                a.nav-link(href='/reminderdd') Reminder Msg Admin
                         li.nav-item
                             a.nav-link(href='/login/logout') Logout
             br

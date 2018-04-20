@@ -11,8 +11,7 @@ function enable () {
   deleteUser();
   deleteGroup();
   deleteReminder();
-  $('#histlog').DataTable();
-  // dateTimePicker();
+  histTable();
   // $('.addNum').on('click', addNumFields);
   // $('.removeNum').on('click', remNumFields);
 }
@@ -77,12 +76,12 @@ function deleteReminder () {
           });
       });
 }
-function dateTimePicker () {
-  $('#inputDate').datetimepicker({
-      sideBySide: true,
-      format: 'MM-DD-YYYY hh:mm a',
-  });
+function histTable() {
+$('#histlog').DataTable({
+  "order": [[ 0, "desc" ]]
+});
 }
+
 // -------------UNUSED FUNCTIONS--------------------- //
 // Counts number of character in text message preview
 function textareaCount () {

@@ -98,27 +98,35 @@ app.set('view engine', 'pug');
     })
 
 // Routes
-  // Route variables
-  let twilioRouter = require('./routes/routes_twilio');
-  let rmndrRouter = require('./routes/routes_reminders');
-  let msgRouter = require('./routes/routes_messages');
-  let usersRouter = require('./routes/routes_users');
-  let appRouter = require('./routes/routes_app');
-  let loginRouter = require('./routes/routes_login');
-  let groupddRouter = require('./routes/routes_groupdd');
-  let remddRouter = require('./routes/routes_reminderdd');
-  // let histRouter = require('./routes/routes_history');
+    // DOM: Show '/' Page
+    app.get('/datepicker', function(req,res){
+      res.render('datepicker', {
+        title: 'DatePicker'
+      });
+    });
 
-  // Route statements
-  // app.use('/history', histRouter);
-  app.use('/reminderdd', remddRouter);
-  app.use('/groupdd', groupddRouter);
-  app.use('/messages', msgRouter);
-  app.use('/reminders', rmndrRouter);
-  app.use('/users', usersRouter);
-  app.use('/login', loginRouter);
-  app.use('/twilio', twilioRouter);
-  app.use('/', appRouter);
+// Route variables
+    let twilioRouter = require('./routes/routes_twilio');
+    let rmndrRouter = require('./routes/routes_reminders');
+    let msgRouter = require('./routes/routes_messages');
+    let usersRouter = require('./routes/routes_users');
+    let appRouter = require('./routes/routes_app');
+    let loginRouter = require('./routes/routes_login');
+    let groupddRouter = require('./routes/routes_groupdd');
+    let remddRouter = require('./routes/routes_reminderdd');
+    // let histRouter = require('./routes/routes_history');
+
+// Route statements
+    // app.use('/history', histRouter);
+    app.use('/reminderdd', remddRouter);
+    app.use('/groupdd', groupddRouter);
+    app.use('/messages', msgRouter);
+    app.use('/reminders', rmndrRouter);
+    app.use('/users', usersRouter);
+    app.use('/login', loginRouter);
+    app.use('/twilio', twilioRouter);
+    app.use('/', appRouter);
+
 
 // Error Handler
     // catch 404 and forward to error handler

@@ -8,18 +8,18 @@ block content
             form(id="txtForm" role='form' method='POST' action='/reminders/preview')
                 .form-group
                     label(for='txtStdRmndr') Standard Reminder:
-                    select.form-control(name="txtStdRmndr" size="0" required)
+                    select.form-control(name="txtStdRmndr" size="0")
                         option(disabled='', selected='', value='')  -- Select a Reminder Message --
                         each reminderdd, i in reminderdds
                             option(value=reminderdd.name) #{reminderdd.name}
                 .form-group
                     label(for='txtCstmRmndr') Personalized Message:
                     input.form-control(name='txtCstmRmndr' type='textarea' placeholder='')
-                .form-row.col-sm-4
+                .form-row.col-sm-3
                     .form-group
                         label(for='txtApptDate') Appointment Date:
                         input.form-control(name='txtApptDate' type='date' required)
-                .form-row.col-sm-4
+                .form-row.col-sm-3
                     .form-group
                         label(for='txtApptTime') Appointment Time:
                         input.form-control(name='txtApptTime' type='time' value='09:00:00' step='900' required)                            
@@ -32,11 +32,11 @@ block content
                         option(disabled='', selected='', value='')  -- Select a Workgroup --
                         each groupdd, i in groupdds
                             option(value=groupdd.name) #{groupdd.name}
-                .form-row.col-sm-4
+                .form-row.col-sm-3
                     .form-group
                         label(for='txtClient1') Client Phone Number:
                         input.form-control(name='txtClient1' type='number' placeholder='' min='2002000000' max='9999999999' required)
-                .form-row.col-sm-4
+                .form-row.col-sm-3
                     .form-group
                         label(for='txtCallback') Employee Phone Number:
                         input.form-control(name='txtCallback', type='number' placeholder='' min='2002000000' max='9999999999' required)

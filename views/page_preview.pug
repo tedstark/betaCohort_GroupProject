@@ -9,9 +9,10 @@ block content
             h4 Please confirm/edit recipient text message:
             br
             form(id="txtForm" role='form' method='POST' action='/twilio/send')
-                .form-group
-                    label(for='previewPhone') Client #:
-                    input.form-control(name='previewPhone' type='number' placeholder='' min='2002000000' max='9999999999' value=txtToPhone required)
+                .form-row.col-sm-3
+                    .form-group
+                        label(for='previewPhone') Client Phone Number:
+                        input.form-control(name='previewPhone' type='number' placeholder='' min='2002000000' max='9999999999' value=txtToPhone required)
                 .form-group
                     label(for='previewMessage') Text Message to be Sent:
                     textarea.previewMsg.form-control(name='previewMessage' required)= txtFullMsg

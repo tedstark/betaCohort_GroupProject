@@ -59,7 +59,7 @@ router.use(bodyParser.urlencoded({ extended: false }));
                 res.render('page_history', {
                   responses:messages,
                   title: 'Message History/Log',
-                  title2: 'Messages Sent Over the Last Week',
+                  title2: 'Messages Sent Over the Last 14 Days',
                   moment:moment
                 });
             });

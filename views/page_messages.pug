@@ -18,11 +18,11 @@ block content
                         option(disabled='', selected='', value='')  -- Select a Workgroup --
                         each groupdd, i in groupdds
                             option(value=groupdd.name) #{groupdd.name}
-                .form-row.col-sm-6
+                .form-row.col-sm-3
                     .form-group
                         label(for='txtClient1') Client Phone Number:
                         input.form-control(name='txtClient1' type='number' placeholder='' min='2002000000' max='9999999999' required)
-                .form-row.col-sm-6
+                .form-row.col-sm-3
                     .form-group
                         label(for='txtCallback') Employee Phone Number:
                         input.form-control(name='txtCallback', type='number' placeholder='' min='2002000000' max='9999999999' required)
