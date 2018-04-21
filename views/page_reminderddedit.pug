@@ -8,8 +8,8 @@ block content
             form(role='form' method='POST' action='/reminderdd/edit/'+reminderddInForm._id)
                 .form-group
                     label(for='reminderName') Reminder Message:
-                    input.form-control(class='u-full-width', name='groupName', type='text', placeholder='' value=reminderddInForm.name required)
+                    input.form-control(class='mlen', name='groupName', type='text', placeholder='' value=reminderddInForm.name required)
                 br
-                button.btn.btn-info.btn-sm(type='submit') Submit Changes
-                a.button.btn.btn-default.btn-sm(type='button' href='/reminderdd') Cancel
+                button.btn.btn-info.btn-sm(class='bluebtn2', type='submit') Submit Changes
+                a.button.btn.btn-default.btn-md(type='button' href='/reminderdd') Cancel
             br

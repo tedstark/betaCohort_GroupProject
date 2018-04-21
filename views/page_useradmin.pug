@@ -12,22 +12,22 @@ block content
                 .form-row.col-sm-6
                     .form-group
                         label(for='username') Username:
-                        input.form-control(class='u-full-width', name='username', type='text', placeholder='' required)
+                        input.form-control(class='loginfld', name='username', type='text', placeholder='' required)
                     .form-group
                         label(for='role') Role:
-                        select.form-control(name='role', size='0' required)
+                        select.form-control(class='loginfld' name='role', size='0' required)
                             option(disabled='', selected='', value='')  -- Select a Role -- 
                             option(value='admin') admin
                             option(value='staff') staff
                 .form-row.col-sm-6
                     .form-group
                         label(for='password') Password:
-                        input.form-control(name='password', type='password', placeholder='' required)
+                        input.form-control(class='loginfld' name='password', type='password', placeholder='' required)
                     .form-group
                         label(for='password2') Confirm Password:
-                        input.form-control(name='password2' type='password' placeholder='' required)
+                        input.form-control(class='loginfld' name='password2' type='password' placeholder='' required)
                 br
-                input.btn.btn-info.btn-sm(type="submit", value="Submit User")
+                input.btn.btn-info.btn-sm(class='bluebtn2', type="submit", value="Submit User")
             br
             hr
         .container

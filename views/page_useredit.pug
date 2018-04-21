@@ -8,22 +8,22 @@ block content
             form(role='form' method='POST' action='/users/edit/'+userInForm._id)
                 .form-group
                     label(for='username') Username:
-                    input.form-control(class='u-full-width', name='username', type='text', placeholder='' value=userInForm.username required)
+                    input.form-control(class='loginfld', name='username', type='text', placeholder='' value=userInForm.username required)
                 br
                 .form-group
                     label(for='role') Role:
-                    select.form-control(name='txtFromGrp', size='0' value=userInForm.role required)
+                    select.form-control(class='loginfld' name='txtFromGrp', size='0' value=userInForm.role required)
                         option(value='admin') admin
                         option(value='staff') staff
                 br
                 .form-group
                     label(for='password') Password:
-                    input.form-control(name='password', type='password', placeholder='' required)
+                    input.form-control(class='loginfld' name='password', type='password', placeholder='' required)
                 br
                 .form-group
                     label(for='password2') Confirm Password:
-                    input.form-control(name='password2' type='password' placeholder='' required)
+                    input.form-control(class='loginfld' name='password2' type='password' placeholder='' required)
                 br
-                button.btn.btn-info.btn-sm(type='submit') Submit Changes
-                a.button.btn.btn-default.btn-sm(type='button' href='/users') Cancel
+                button.btn.btn-info.btn-sm(class='bluebtn2', type='submit') Submit Changes
+                a.button.btn.btn-default.btn-md(type='button' href='/users') Cancel
             br

@@ -53,12 +53,12 @@ router.use(bodyParser.urlencoded({ extended: false }));
         twilio.messages.each(filterOpts, function(message) {
             messages.push(message);
         });
-        delay(1000)
+        delay(5000)
             .then(() => {
                 console.log(messages);
                 res.render('page_history', {
                   responses:messages,
-                  title: 'Message History/Log',
+                  title: 'Message History Log',
                   title2: 'Messages Sent Over the Last 14 Days',
                   moment:moment
                 });

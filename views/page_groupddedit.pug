@@ -8,8 +8,8 @@ block content
             form(role='form' method='POST' action='/groupdd/edit/'+groupddInForm._id)
                 .form-group
                     label(for='groupName') Workgroup Name:
-                    input.form-control(class='u-full-width', name='groupName', type='text', placeholder='' value=groupddInForm.name required)
+                    input.form-control(class='mlen', name='groupName', type='text', placeholder='' value=groupddInForm.name required)
                 br
-                button.btn.btn-info.btn-sm(type='submit') Submit Changes
-                a.button.btn.btn-default.btn-sm(type='button' href='/groupdd') Cancel
+                button.btn.btn-info.btn-sm(class='bluebtn2' Type='submit') Submit Changes
+                a.button.btn.btn-default.btn-md(type='button' href='/groupdd') Cancel
             br

@@ -7,13 +7,13 @@ block content
             h1 Please log in...
             form(role='form',method='POST', action='/login')
                 .form-group
-                    label(for='username') Your User Name:
-                    input.form-control(class='u-full-width', name='username',type='text', placeholder='')
+                    label(for='username') User Name:
+                    input.form-control(class='loginfld' name='username',type='text', placeholder='')
                 .form-group
-                    label(for='password') Your Password:
-                    input.form-control(class='u-full-width', name='password',type='password', placeholder='')
+                    label(for='password') Password:
+                    input.form-control(class='loginfld' name='password',type='password', placeholder='')
                 br
-                input.button-primary(type='submit', value='Login')
+                input.button-primary(class='bluebtn', type='submit', value='Login')
             br
     if user
         .container

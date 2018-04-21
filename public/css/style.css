@@ -1,10 +1,46 @@
 body {
-  padding: 50px;
+  padding: 3em;
   font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  align-content: center;
+}
+.image img {
+    max-height: 100px;
+    max-width: 100px;
 }
 
+/* standard FSWF blue buttons) */
+.bluebtn{
+    background-color: #187197;
+    color: white;
+    height: 3em;
+    width: 6em;
+}
+/* standard FSWF blue buttons (large) */
+.bluebtn2{
+    background-color: #187197;
+    color: white;
+    height: 3em;
+    width: 9em;
+}
+#greybtn{
+    height: 5em;
+    width: 15em;
+}
+/* standard FSWF blue */
+.form-group{
+    color: #187197;
+}
+/* standard FSWF blue */
+h1 {
+   color: #187197;
+}
+/* standard FSWF orange */
+h2, h3, h4, h5, label, title {
+    color: #e0a228;
+}
+/* standard FSWF blue */
 a {
-  color: #00B7FF;
+  color: #187197;
 }
 
 .alert-error {
@@ -20,12 +56,36 @@ a {
 .alert-error .alert-link {
     color: #491217;
 }
+
 .form-row {
   display: inline-block;
 }
+
+/* login fields-user admin pages too*/
+.loginfld{
+    min-width: 10em;
+    max-width: 20em;
+    border-style: solid;
+    border-width: 1px;
+    border-color: #187197;
+}
+/* standard input field width*/
+.mlen{
+    min-width: 15em;
+    max-width: 35em;
+}
+/* outline all input fields */
+.form-control {
+    border-style: solid;
+    border-width: 1px;
+    border-color: #187197;
+}
+
 .monkey-l {
-    display: inline-block;
-    float: left;
+    /*display: inline-block;*/
+    /*float: left;*/
+    text-align: left;
+    color: #005cbf;
 }
 
 .monkey-r {

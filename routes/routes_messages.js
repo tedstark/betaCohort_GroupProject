@@ -42,7 +42,7 @@ router.use(bodyParser.urlencoded({ extended: false }));
     // POST: Format Message and show preview page
     router.post('/preview', function(req, res) {
         txtToPhone = req.body.txtClient1;
-        txtFullMsg = req.body.txtCustomMsg+' Frm '+req.body.txtCustomFrom+'. '+req.body.txtFromGrp+'. Call '+req.body.txtCallback+' with questions.';
+        txtFullMsg = req.body.txtCustomMsg+' From '+req.body.txtCustomFrom+'. '+req.body.txtFromGrp+'. Call '+req.body.txtCallback+' with questions.';
         returnPage = 'messages';
         res.redirect('/messages/preview');
     });

@@ -8,6 +8,9 @@ html
         link(rel='stylesheet', href='https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css')
         link(rel='stylesheet', href='https://cdn.datatables.net/1.10.16/css/dataTables.bootstrap4.min.css')
         link(rel='stylesheet', href='/css/style.css')
+
+        //link(rel='stylesheet', href='/css/kb.css')
+
         script(type='text/javascript' src='https://code.jquery.com/jquery-3.3.1.min.js')
         script(type='text/javascript' src='https://cdn.datatables.net/1.10.16/js/jquery.dataTables.min.js')
         script(type='text/javascript' src='https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js')
@@ -30,11 +33,15 @@ html
                     div.alert.alert-danger.alert-dismissible.fade.show #{error.msg}
                       button(type="button" class="close" data-dismiss="alert") &times;
             br
-        block content
+            // KEEP .IMAGE ONE INDENT IN FROM .CONTAINTER ABOVE
+            .image
+                img(src='/images/logo-FS.jpeg')
+
+    block content
         .container
             hr
             footer
                 .myfooter.monkey-l
                     p Copyright ©2018 Fresh Start Women's Foundation
-                .myfooter.monkey-r
+                .myfooter.monkey-l
                     p 2018/04/19.v03

@@ -8,13 +8,13 @@ block content
             form(id="txtForm" role='form' method='POST' action='/messages/preview')
                 .form-group
                     label(for='txtCustomMsg') Personalized Message:
-                    textarea.form-control(name='txtCustomMsg' placeholder='' required)
+                    textarea.form-control(class='mlen' name='txtCustomMsg' placeholder='' required)
                 .form-group
                     label(for='txtCustomFrom') From:
-                    input.form-control(name='txtCustomFrom' type='text' placeholder='')
+                    input.form-control(class='mlen' name='txtCustomFrom' type='text' placeholder='')
                 .form-group
                     label(for='txtFromGrp') Workgroup:
-                    select.form-control(name='txtFromGrp', size='0' required)
+                    select.form-control(class='mlen' name='txtFromGrp', size='0' required)
                         option(disabled='', selected='', value='')  -- Select a Workgroup --
                         each groupdd, i in groupdds
                             option(value=groupdd.name) #{groupdd.name}
@@ -27,6 +27,10 @@ block content
                         label(for='txtCallback') Employee Phone Number:
                         input.form-control(name='txtCallback', type='number' placeholder='' min='2002000000' max='9999999999' required)
                 br
-                input.btn.btn-info.btn-sm(type="submit", value="Submit Text")
-                a.btn.btn-default.btn-sm.clrForm(type="button") Reset Form
+                .form-row.col-sm-3
+                    .form-group
+                        input.btn.btn-info.btn-sm(class="bluebtn2", type="submit", value="Preview/Send")
+                .form-row.col-sm-3
+                    .form-group
+                        a.btn.btn-default.btn-md.clrForm(type="button") Reset Form
             br

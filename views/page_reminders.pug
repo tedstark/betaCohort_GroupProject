@@ -8,13 +8,13 @@ block content
             form(id="txtForm" role='form' method='POST' action='/reminders/preview')
                 .form-group
                     label(for='txtStdRmndr') Standard Reminder:
-                    select.form-control(name="txtStdRmndr" size="0")
+                    select.form-control(class='mlen' name="txtStdRmndr" size="0")
                         option(disabled='', selected='', value='')  -- Select a Reminder Message --
                         each reminderdd, i in reminderdds
                             option(value=reminderdd.name) #{reminderdd.name}
                 .form-group
                     label(for='txtCstmRmndr') Personalized Message:
-                    input.form-control(name='txtCstmRmndr' type='textarea' placeholder='')
+                    textarea.form-control(class='mlen' cols='60' name='txtCstmRmndr' placeholder='')
                 .form-row.col-sm-3
                     .form-group
                         label(for='txtApptDate') Appointment Date:
@@ -25,10 +25,10 @@ block content
                         input.form-control(name='txtApptTime' type='time' value='09:00:00' step='900' required)                            
                 .form-group
                     label(for='txtCustomFrom') From:
-                    input.form-control(name='txtCustomFrom' type='text' placeholder='')
+                    input.form-control(class='mlen' name='txtCustomFrom' type='text' placeholder='')
                 .form-group
                     label(for='txtFromGrp') Workgroup:
-                    select.form-control(name='txtFromGrp', size='0' required)
+                    select.form-control(class='mlen' name='txtFromGrp', size='0' required)
                         option(disabled='', selected='', value='')  -- Select a Workgroup --
                         each groupdd, i in groupdds
                             option(value=groupdd.name) #{groupdd.name}
@@ -41,6 +41,10 @@ block content
                         label(for='txtCallback') Employee Phone Number:
                         input.form-control(name='txtCallback', type='number' placeholder='' min='2002000000' max='9999999999' required)
                 br
-                input.btn.btn-info.btn-sm(type="submit", value="Preview/Send")
-                a.btn.btn-default.btn-sm.clrForm(type="button") Reset Form
+                .form-row.col-sm-3
+                    .form-group
+                        input.btn.btn-default.btn-sm(class='bluebtn2', type="submit", value="Preview/Send")
+                .form-row.col-sm-3
+                    .form-group
+                        a.btn.btn-default.btn-md.clrForm(type="button") Reset Form
             br
