@@ -12,8 +12,8 @@ block content
                 .form-group
                     //- label(for='reminderName') Username:
                     input.form-control(class='mlen', name='reminderMsg', type='text', placeholder='' required)
-                br
-                input.btn.btn-info.btn-sm(class='bluebtn2', type="submit", value="Submit Reminder")
+                
+                input.btn.btn-info.btn-fswf1(type="submit", value="Submit User")
             br
             hr
         .container
@@ -31,5 +31,5 @@ block content
                             td= reminderdd.name
                             td= reminderdd.active
                             td
-                                a.btn.btn-info.btn-sm(href="/reminderdd/edit/"+reminderdd._id) Edit
+                                a.btn.btn-info.btn-fswf3(href="/reminderdd/edit/"+reminderdd._id) Edit
                                 button.btn.btn-danger.btn-sm.delete-reminder(href='#', data-id=reminderdd._id) Delete

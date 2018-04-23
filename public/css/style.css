@@ -1,6 +1,6 @@
 body {
-  padding: 3em;
-  font: 14px "Lucida Grande", Helvetica, Arial, sans-serif;
+  /* padding: 3em; */
+  font: 14px "Raleway", Helvetica, Arial, sans-serif;
   align-content: center;
 }
 .image img {
@@ -10,37 +10,78 @@ body {
 
 /* standard FSWF blue buttons) */
 .bluebtn{
-    background-color: #187197;
+    background-color: #178FB0;
     color: white;
     height: 3em;
     width: 6em;
 }
 /* standard FSWF blue buttons (large) */
 .bluebtn2{
-    background-color: #187197;
+    background-color: #178FB0;
     color: white;
     height: 3em;
-    width: 9em;
+    /* width: 9em; */
 }
 #greybtn{
     height: 5em;
     width: 15em;
 }
+.btn-fswf1{
+  background-color: #178FB0;
+  margin-right: 50px;
+  margin-top: 30px;
+  border-color: #0E566A;
+  border-width: 1px;
+}
+.btn-fswf1:hover {
+  color: #178FB0;
+  background-color: #DDDDDD;
+  border-color: #0E566A;
+}
+
+.btn-fswf2{
+  background-color: #DDDDDD;
+  margin-right: 50px;
+  margin-top: 30px;
+  border-color: #0E566A;
+  border-width: 1px;
+  color: #178FB0;
+}
+.btn-fswf3{
+  background-color: #178FB0;
+  margin-right: 25px;
+  border-color: #0E566A;
+  border-width: 1px;
+}
+.btn-fswf3:hover {
+  color: #178FB0;
+  background-color: #DDDDDD;
+  border-color: #0E566A;
+}
+.btn-danger {
+  border-color: #0E566A;
+  height: 35px;
+}
 /* standard FSWF blue */
 .form-group{
-    color: #187197;
+    color: #178FB0;
 }
 /* standard FSWF blue */
 h1 {
-   color: #187197;
+   color: #178FB0;
 }
 /* standard FSWF orange */
-h2, h3, h4, h5, label, title {
+h2, h3, h4, h5, title {
     color: #e0a228;
+}
+/* standard FSWF orange */
+label {
+    color: #e0a228;
+    font-size: 16px;
 }
 /* standard FSWF blue */
 a {
-  color: #187197;
+  color: #178FB0;
 }
 
 .alert-error {
@@ -82,13 +123,41 @@ a {
 }
 
 .monkey-l {
-    /*display: inline-block;*/
-    /*float: left;*/
-    text-align: left;
-    color: #005cbf;
+    display: inline-block;
+    float: left;
+    color: #187197;
 }
 
 .monkey-r {
     display: inline-block;
     float: right;
+    color: #187197;
+}
+#navbarContainer {
+  padding-top: 0em;
+}
+
+th {
+  color: #178FB0;
+  font: 18px "Raleway", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+}
+td {
+  color: #178FB0;
+  font: 16px "Raleway", Helvetica, Arial, sans-serif;
+}
+.page-item.active .page-link{
+  background-color: #178FB0
+}
+
+.nav-link {
+  font-weight: bold;
+  font: 16px "Raleway", Helvetica, Arial, sans-serif;
+}
+
+.fswf {
+  font-weight: bold;
+  font: 16px "Raleway", Helvetica, Arial, sans-serif;
+  color: #0E566A;
+
 }

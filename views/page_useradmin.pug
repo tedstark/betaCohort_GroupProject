@@ -26,8 +26,8 @@ block content
                     .form-group
                         label(for='password2') Confirm Password:
                         input.form-control(class='loginfld' name='password2' type='password' placeholder='' required)
-                br
-                input.btn.btn-info.btn-sm(class='bluebtn2', type="submit", value="Submit User")
+                
+                input.btn.btn-info.btn-fswf1(type="submit", value="Submit User")
             br
             hr
         .container
@@ -47,6 +47,6 @@ block content
                             td= user.role
                             td= user.active
                             td
-                              a.btn.btn-info.btn-sm(href="/users/edit/"+user._id) Edit
+                              a.btn.btn-info.btn-fswf3(href="/users/edit/"+user._id) Edit
                               if user.role!=='admin'
                                   button.btn.btn-danger.btn-sm.delete-user(href='#', data-id=user._id) Delete

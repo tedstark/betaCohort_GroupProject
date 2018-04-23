@@ -10,7 +10,12 @@ const passport = require('passport');
         title: 'Login Page'
       });
     });
-
+    // DOM: Show '/' Page
+    router.get('/koddie', function(req,res){
+      res.render('koddie_navbar', {
+        title: 'Koddie"s Page'
+      });
+    });
     // // DOM: Show 'Reminders' Page
     // router.get('/reminders', function(req,res){
     //     res.render('page_reminders', {

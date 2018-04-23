@@ -12,8 +12,8 @@ block content
                 .form-group
                     //- label(for='groupName') Group Name:
                     input.form-control(class='mlen', name='groupName', type='text', placeholder='' required)
-                br
-                input.btn.btn-info.btn-sm(class='bluebtn2', type="submit", value="Submit Group")
+                
+                input.btn.btn-info.btn-fswf1(type="submit", value="Submit User")
             br
             hr
         .container
@@ -31,5 +31,5 @@ block content
                             td= groupdd.name
                             td= groupdd.active
                             td
-                                a.btn.btn-info.btn-sm(href="/groupdd/edit/"+groupdd._id) Edit
+                                a.btn.btn-info.btn-fswf3(href="/groupdd/edit/"+groupdd._id) Edit
                                 button.btn.btn-danger.btn-sm.delete-group(href='#', data-id=groupdd._id) Delete
