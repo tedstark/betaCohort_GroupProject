@@ -153,11 +153,15 @@ td {
 .nav-link {
   font-weight: bold;
   font: 16px "Raleway", Helvetica, Arial, sans-serif;
+  color: white;
 }
 
 .fswf {
   font-weight: bold;
   font: 16px "Raleway", Helvetica, Arial, sans-serif;
-  color: #0E566A;
-
+  color: #FFFFFF;
+}
+.fswf-navbg {
+  background-color: #178FB0;
+  min-height: 40px;
 }
