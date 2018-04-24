@@ -72,7 +72,7 @@ router.use(bodyParser.urlencoded({ extended: false }));
         twilio.messages.each(filterOpts, function(message) {
             messages.push(message);
         });
-        delay(5000)
+        delay(1000)
             .then(() => {
                 // console.log(messages);
                 res.render('page_history', {
