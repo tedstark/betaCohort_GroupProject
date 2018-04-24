@@ -12,6 +12,7 @@ function enable () {
   deleteGroup();
   deleteReminder();
   histTable();
+  deleteMessage();
   // $('.addNum').on('click', addNumFields);
   // $('.removeNum').on('click', remNumFields);
 }
@@ -76,6 +77,27 @@ function deleteReminder () {
           });
       });
 }
+
+function deleteMessage () {
+    $('.delete-msg').on('click', function (response) {
+          $target = $(response.target);
+          var sid = $target.attr('data-sid');
+
+          $.ajax({
+              type:'DELETE',
+              url: '/twilio/delete/'+sid,
+              success: function (response) {
+                location.reload(true);
+                req.flash('success', 'Message deleted!');
+              },
+              error: function (err) {
+                  console.log(err);
+              }
+          });
+          console.log('hello');
+      });
+}
+
 function histTable() {
 $('#histlog').DataTable({
   "order": [[ 0, "desc" ]]

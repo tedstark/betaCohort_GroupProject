@@ -15,11 +15,14 @@ block content
                         th(scope='col') Sent To:
                         th(scope='col') Text Message:
                         th(scope='col') Status:
+                        //- th(scope='col') SID:                        
                 tbody
                     each response, i in responses
                         tr
-                            td= moment(response.dateSent).format("MM/DD/YYYY, HH:mm")
+                            td= moment(response.dateSent).format("MM/DD/YY, HH:mm")
                             td= response.to
                             td= response.body
                             td= response.status
+                            //- td
+                                a.delete-msg(href='#' data-sid=response.sid title='Click to Delete Message')= response.sid
                 

@@ -15,7 +15,7 @@ let ReminderDD = require('../models/reminderdd');
         } else {
             res.render('page_reminderdd', {
                 reminderdds:reminderdds,
-                title: 'Standard Reminders Admin'
+                title: 'Reminder Message Admin'
             });
           }
       })
@@ -84,7 +84,7 @@ let ReminderDD = require('../models/reminderdd');
       }
   });
 
-  // DELETE: Removes user from database
+  // DELETE: Removes reminder from database
   router.delete('/delete/:id', function (req,res) {
     let query = {_id:req.params.id}
     ReminderDD.remove(query, function (err) {

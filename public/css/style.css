@@ -3,11 +3,37 @@ body {
   font: 14px "Raleway", Helvetica, Arial, sans-serif;
   align-content: center;
 }
-.image img {
-    max-height: 100px;
-    max-width: 100px;
+/* standard FSWF blue */
+h1 {
+   color: #178FB0;
 }
-
+/* standard FSWF orange */
+h2, h3, h4, h5, title {
+    color: #e0a228;
+}
+/* standard FSWF orange */
+label {
+    color: #e0a228;
+    font-size: 16px;
+}
+/* standard FSWF blue */
+a {
+  color: #178FB0;
+}
+th {
+  color: #178FB0;
+  font: 16px "Raleway", Helvetica, Arial, sans-serif;
+  font-weight: bold;
+  text-align: center;
+}
+td {
+  color: #178FB0;
+  font: 14px "Raleway", Helvetica, Arial, sans-serif;
+}
+.image img {
+    max-height: 200px;
+    max-width: 200px;
+}
 /* standard FSWF blue buttons) */
 .bluebtn{
     background-color: #178FB0;
@@ -26,6 +52,15 @@ body {
     height: 5em;
     width: 15em;
 }
+.fswf {
+  font-weight: bold;
+  font: 16px "Raleway", Helvetica, Arial, sans-serif;
+  color: #FFFFFF;
+}
+.fswf-navbg {
+  background-color: #178FB0;
+  min-height: 40px;
+}
 .btn-fswf1{
   background-color: #178FB0;
   margin-right: 50px;
@@ -38,7 +73,6 @@ body {
   background-color: #DDDDDD;
   border-color: #0E566A;
 }
-
 .btn-fswf2{
   background-color: #DDDDDD;
   margin-right: 50px;
@@ -66,34 +100,14 @@ body {
 .form-group{
     color: #178FB0;
 }
-/* standard FSWF blue */
-h1 {
-   color: #178FB0;
-}
-/* standard FSWF orange */
-h2, h3, h4, h5, title {
-    color: #e0a228;
-}
-/* standard FSWF orange */
-label {
-    color: #e0a228;
-    font-size: 16px;
-}
-/* standard FSWF blue */
-a {
-  color: #178FB0;
-}
-
 .alert-error {
     color: #721c24;
     background-color: #f8d7da;
     border-color: #f5c6cb;
 }
-
 .alert-error hr {
     border-top-color: #f1b0b7;
 }
-
 .alert-error .alert-link {
     color: #491217;
 }
@@ -136,32 +150,28 @@ a {
 #navbarContainer {
   padding-top: 0em;
 }
-
-th {
-  color: #178FB0;
-  font: 18px "Raleway", Helvetica, Arial, sans-serif;
-  font-weight: bold;
-}
-td {
-  color: #178FB0;
-  font: 16px "Raleway", Helvetica, Arial, sans-serif;
-}
 .page-item.active .page-link{
   background-color: #178FB0
 }
-
 .nav-link {
   font-weight: bold;
   font: 16px "Raleway", Helvetica, Arial, sans-serif;
   color: white;
 }
-
-.fswf {
-  font-weight: bold;
-  font: 16px "Raleway", Helvetica, Arial, sans-serif;
-  color: #FFFFFF;
+.logo {
+    display: inline-block;
+    float: right;
+    color: #187197;
+    /* margin-left: 50%; */
+    top: 0px;
 }
-.fswf-navbg {
-  background-color: #178FB0;
-  min-height: 40px;
+.navbar-nav {
+  overflow: visible;
+}
+.messages {
+  max-width: 50%;
+}
+.delete-msg{
+  color: red;
+  text-decoration: underline;
 }

@@ -31,6 +31,25 @@ router.use(bodyParser.urlencoded({ extended: false }));
         res.redirect('/'+returnPage);
     });
 
+    // DELETE: Removes message from Twilio log
+    router.delete('/delete/:id', function (req,res) {
+      let msgSID = {_id:req.params.id};
+      console.log(msgSID._id);
+      client.messages(msgSid._id).delete()
+        .then((message) => console.log(message))
+      //     if (message.status === 'delivered') {
+      //       client.messages(msgSID).delete()
+      //         .then(() => console.log("Message deleted"))
+      //         .catch((err) => console.error(err));
+      //     } else {
+      //       setTimeout(() => tryDelete(msgSID), 1000);
+      //       res.send('Success');
+      //       req.flash('success', 'Reminder message deleted!');
+      //     }
+      //   })
+      //   .catch((err) => console.error(err));
+    });
+
     // POST: Auto response from application for received text messages
     router.post('/sms', function (req, res) {
         const twiml = new MessagingResponse();
@@ -55,11 +74,11 @@ router.use(bodyParser.urlencoded({ extended: false }));
         });
         delay(5000)
             .then(() => {
-                console.log(messages);
+                // console.log(messages);
                 res.render('page_history', {
                   responses:messages,
-                  title: 'Message History Log',
-                  title2: 'Messages Sent Over the Last 14 Days',
+                  title: 'Text Message History',
+                  title2: 'Text Messages Sent in the Last 14 Days',
                   moment:moment
                 });
             });
