@@ -15,7 +15,7 @@ block content
                         th(scope='col') Sent To:
                         th(scope='col') Text Message:
                         th(scope='col') Status:
-                        th(scope='col') SID:                        
+                        //- th(scope='col') SID:                        
                 tbody
                     each response, i in responses
                         tr
@@ -23,6 +23,6 @@ block content
                             td= response.to
                             td= response.body
                             td= response.status
-                            td
-                                a.delete-msg(href='#' data-sid=response.sid title='Click to Delete Message')= response.sid
+                            //- td
+                            //-     a.delete-msg(href='#' data-sid=response.sid title='Click to Delete Message')= response.sid
                 
