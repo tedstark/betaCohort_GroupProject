@@ -9,7 +9,6 @@ View the original scope/requirements document [here](https://docs.google.com/doc
 - [Technologies](#technologies)
 - [Development Team](#development-team)
 - [Application Screenshots](#application-screenshots)
-- [Acknowledgments](#acknowledgments)
 
 ---
 ## Description
@@ -62,8 +61,6 @@ The application allows admins to not only send text messages, but also administe
 - [Twilio](https://www.twilio.com/) - Text messaging provider
 
 ---
-Final Group Project for Bootcamp; Text messaging application developed for Fresh Start Women's Foundation
-
 ## Development Team:<br>
 
 Joan Adams<br>
@@ -76,14 +73,55 @@ Ted Stark
 
 ### **Landing Page**
 
-![login1.jpeg](/screenshots/login1.jpg)
+![login1.jpg](/screenshots/login1.jpg)
 
 The initial landing page allows for either an admin or staff user to enter the username and password and log into the app
 
 ### **Disclaimer Page**
 
-![login2.jpeg](/screenshots/login2.jpg)
+![login2.jpg](/screenshots/login2.jpg)
 
 The disclaimer page simply reinforces FSWF behavior polices with an Agree button to move into the actual application.
 
+### **Send a Reminder Page**
+
+![remindersend.jpg](/screenshots/remindersend.jpg)
+
+The heart of the application. Creates a text message in a Reminder format.
+
+### **Send a Message Page**
+
+![messagesend.jpg](/screenshots/messagesend.jpg)
+
+Creates a text message in a simple Message format.
+
+### **Preview Page**
+
+![previewmsg.jpeg](/screenshots/previewmsg.jpg)
+
+This page allows the user to preview the details and message before actually sending it through Twilio.
+
+### **Text Msg History Page**
+
+![history.jpeg](/screenshots/history.jpg)
+
+This page allows the user to view text message history pulled from Twilio's records.
+
+### **User Admin Page**
+
+![useradmin.jpeg](/screenshots/useradmin.jpg)
+
+This page allows an admin to view, edit, and delete registered users. User information is stored in the the Mongo database.
+
+### **Reminder Admin Page**
+
+![reminderadmin.jpeg](/screenshots/reminderadmin.jpg)
+
+This page allows an admin to view, edit, and delete registered users. User information is stored in the the Mongo database.
+
+### **Workgroup Admin Page**
+
+![workgroup.jpeg](/screenshots/workgroup.jpg)
+
+This page allows an admin to view, edit, and delete registered users. User information is stored in the the Mongo database.
 
