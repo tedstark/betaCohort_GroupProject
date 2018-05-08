@@ -7,8 +7,8 @@ View the original scope/requirements document [here](https://docs.google.com/doc
 
 - [Description](#description)
 - [Technologies](#technologies)
-- [Product Example](#product-example)
-- [Contributors](#contributors)
+- [Development Team](#development-team)
+- [Application Screenshots](#application-screenshots)
 - [Acknowledgments](#acknowledgments)
 
 ---
@@ -16,21 +16,6 @@ View the original scope/requirements document [here](https://docs.google.com/doc
 This application was developed by a team of student developers enrolled in the first Java Programming Bootcamp held by Grand Canyon University in the Spring 2018.<br>
 The application allows FSWF staff to send text messages to their clients in the form of a reminder or simiple message.<br>
 The application allows admins to not only send text messages, but also administer customizable parts of the application an users.<br>
-
----
-## Application Screenshots
-
-### **Landing Page**
-
-![login1.jpeg](/screenshots/login1.jpg)
-
-The initial landing page allows for either an admin or staff user to enter the username and password and log into the app
-
-### **Disclaimer Page**
-
-![login2.jpeg](/screenshots/login2.jpg)
-
-The disclaimer page simply reinforces FSWF behavior polices with an Agree button to move into the actual application.
 
 ---
 ## Technologies
@@ -80,7 +65,25 @@ The disclaimer page simply reinforces FSWF behavior polices with an Agree button
 Final Group Project for Bootcamp; Text messaging application developed for Fresh Start Women's Foundation
 
 ## Development Team:<br>
+
 Joan Adams<br>
 Koddie Becker<br>
 Mark Feinman<br>
 Ted Stark
+
+---
+## Application Screenshots
+
+### **Landing Page**
+
+![login1.jpeg](/screenshots/login1.jpg)
+
+The initial landing page allows for either an admin or staff user to enter the username and password and log into the app
+
+### **Disclaimer Page**
+
+![login2.jpeg](/screenshots/login2.jpg)
+
+The disclaimer page simply reinforces FSWF behavior polices with an Agree button to move into the actual application.
+
+
