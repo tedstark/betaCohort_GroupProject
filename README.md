@@ -1,6 +1,6 @@
 # betaCohort_GroupProject
 ## Non-profit Partner Development Project for Fresh Start Women's Foundation 
-View the application online [here](https://ssg-develop.herokuapp.com).<br>
+View the application online [here](https://fswfmsgs.herokuapp.com).<br>
 View the original scope/requirements document [here](https://docs.google.com/document/d/1ur9KTJraJvByD5bO8_0gqMw57V0Y3qJrpD0njT5I-XM/edit?usp=sharing)
 
 ## Table of Contents
