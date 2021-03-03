@@ -31,7 +31,7 @@
     "passport-local": "^1.0.0",
     "popper": "^1.0.1",
     "process-env": "^1.1.0",
-    "pug": "2.0.0-beta11",
+    "pug": "3.0.1",
     "request": "^2.88.0",
     "request-promise": "^4.2.2",
     "twilio": "^3.22.0"
